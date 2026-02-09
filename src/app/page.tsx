@@ -298,7 +298,7 @@ function FeaturesSection() {
           </p>
         </div>
 
-        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '80px' }}>
+        <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '80px', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
           {MODULES.map((mod, idx) => {
             const reversed = idx % 2 === 1;
             return (
@@ -307,19 +307,19 @@ function FeaturesSection() {
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '64px',
+                  gap: '48px',
                   flexDirection: reversed ? 'row-reverse' : 'row',
                 }}
               >
                 {/* Illustration */}
                 <div
                   style={{
-                    flex: '0 0 auto',
-                    width: '380px',
+                    flex: '0 0 360px',
+                    width: '360px',
+                    height: '280px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '40px',
                     borderRadius: '20px',
                     background: mod.tagBg,
                     border: '1px solid var(--border-divider)',
@@ -329,7 +329,7 @@ function FeaturesSection() {
                 </div>
 
                 {/* Text */}
-                <div style={{ flex: 1 }}>
+                <div style={{ flex: 1, minWidth: 0, maxWidth: '540px' }}>
                   <span
                     style={{
                       display: 'inline-block',
@@ -349,10 +349,10 @@ function FeaturesSection() {
                   >
                     {mod.title}
                   </h3>
-                  <p style={{ marginTop: '12px', fontSize: '15px', fontWeight: 400, lineHeight: 1.7, color: 'var(--text-secondary)', maxWidth: '460px' }}>
+                  <p style={{ marginTop: '12px', fontSize: '15px', fontWeight: 400, lineHeight: 1.7, color: 'var(--text-secondary)' }}>
                     {mod.desc}
                   </p>
-                  <div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div style={{ marginTop: '24px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px 20px' }}>
                     {mod.capabilities.map((cap) => (
                       <div key={cap.label}>
                         <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--text-strong)' }}>{cap.label}</div>
@@ -417,7 +417,7 @@ function InsightsSection() {
           </h2>
         </div>
 
-        <div style={{ marginTop: '64px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
+        <div style={{ marginTop: '64px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px', maxWidth: '900px', marginLeft: 'auto', marginRight: 'auto' }}>
           {steps.map((s, i) => (
             <div key={s.step} style={{ position: 'relative', textAlign: 'center' }}>
               {/* Connector */}
@@ -502,7 +502,7 @@ function CasesSection() {
           </h2>
         </div>
 
-        <div style={{ marginTop: '64px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        <div style={{ marginTop: '64px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', maxWidth: '1080px', marginLeft: 'auto', marginRight: 'auto' }}>
           {cases.map((c) => (
             <div
               key={c.title}
