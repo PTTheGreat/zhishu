@@ -1,0 +1,342 @@
+[
+  {
+    "id": "1",
+    "slug": "seo-semantic-search-strategy",
+    "title": "语义搜索时代的 SEO 策略：从关键词堆砌到意图理解",
+    "excerpt": "搜索引擎正在从关键词匹配走向语义理解，SEO 策略也需要随之进化。",
+    "category": "tech",
+    "coverImage": "/images/illust-chart.svg",
+    "author": {
+      "name": "李明",
+      "title": "技术VP",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg"
+    },
+    "content": "<h2>一、搜索的范式转移</h2><p>传统 SEO 的核心是关键词密度与外链数量。但随着 Google MUM、百度文心等大模型接入搜索引擎，搜索正在经历从“字符串匹配”到“语义理解”的范式转移。</p><p>这意味着，用户搜索“如何让团队更高效”时，引擎不再只匹配包含这几个字的页面，而是理解用户的底层意图——他可能需要项目管理工具推荐、团队协作方法论、甚至是 OKR 设置指南。</p><h2>二、内容架构的重新设计</h2><p>在语义搜索时代，内容架构比关键词更重要：</p><ul><li><strong>主题集群（Topic Cluster）</strong>：围绕核心话题建立支柱页面和子页面网络</li><li><strong>实体关联</strong>：使用结构化数据标记文章中的实体关系</li><li><strong>FAQ 嵌套</strong>：在长文中自然嵌入问答结构，匹配语音搜索场景</li></ul><h2>三、技术实现要点</h2><p>Schema Markup、内部链接图谱、Core Web Vitals 优化仍然是技术 SEO 的三根支柱。但新增的维度包括：</p><ul><li>多模态内容索引（图片 ALT、视频字幕）</li><li>E-E-A-T 信号强化（经验、专业、权威、信任）</li><li>AI 生成内容的检测与质量把控</li></ul><h2>四、实战建议</h2><p>不要再为单个关键词写文章，而是为一个“问题域”构建内容生态。每篇文章都应该是这个生态中的一个节点，通过语义关联自然连接。</p>",
+    "createdAt": "2026-02-09T02:00:00.000Z",
+    "updatedAt": "2026-02-09T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "2",
+    "slug": "marketing-automation-tech-stack",
+    "title": "2026 营销自动化技术栈全景：从 CDP 到 AI Agent",
+    "excerpt": "构建现代营销技术栈的最佳实践，从数据平台到智能代理的完整链路。",
+    "category": "tech",
+    "coverImage": "/images/illust-rocket.svg",
+    "author": {
+      "name": "王芳",
+      "title": "CTO",
+      "avatar": "https://randomuser.me/api/portraits/women/44.jpg"
+    },
+    "content": "<h2>MarTech 生态的现状</h2><p>2026 年，全球 MarTech 工具已超过 14,000 个。如何在这个庞杂的生态中选择合适的技术栈，成为每个营销团队的核心挑战。</p><h2>核心架构层</h2><ul><li><strong>数据层</strong>：CDP（客户数据平台）统一多渠道数据</li><li><strong>决策层</strong>：AI Agent 实现个性化内容推荐</li><li><strong>执行层</strong>：跨渠道自动化编排引擎</li><li><strong>度量层</strong>：归因模型与 ROI 实时看板</li></ul><h2>选型原则</h2><p>不要追求“最好”的工具，而要追求“最适配”的组合。关键考量维度：数据互通性 > 功能丰富度 > 价格。</p>",
+    "createdAt": "2026-02-09T00:00:00.000Z",
+    "updatedAt": "2026-02-09T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "3",
+    "slug": "ab-testing-beyond-button-color",
+    "title": "A/B 测试的深水区：超越按钮颜色的实验设计方法论",
+    "excerpt": "真正有价值的 A/B 测试，不是改按钮颜色，而是验证商业假设。",
+    "category": "tech",
+    "coverImage": "/images/illust-target.svg",
+    "author": {
+      "name": "陈思远",
+      "title": "高级数据工程师",
+      "avatar": "https://randomuser.me/api/portraits/men/15.jpg"
+    },
+    "content": "<h2>为什么 90% 的 A/B 测试都是无效的</h2><p>大多数团队的 A/B 测试停留在表层——改个按钮颜色、换个标题措辞。这些测试即使有统计显著性，也很难带来真正的业务增量。</p><h2>实验金字塔</h2><p>有效的实验设计应该遵循“实验金字塔”：</p><ul><li>底层：UI 微调（按钮、颜色、文案）</li><li>中层：流程优化（注册路径、支付流程）</li><li>顶层：商业模式验证（定价策略、产品形态）</li></ul><h2>统计陷阱</h2><p>警惕“偷看数据”和“样本量不足”两大陷阱。推荐使用贝叶斯方法替代频率学派的 p 值检验。</p>",
+    "createdAt": "2026-02-08T22:00:00.000Z",
+    "updatedAt": "2026-02-08T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "4",
+    "slug": "first-party-data-strategy",
+    "title": "Cookie 消亡后的第一方数据战略：从采集到激活的全链路设计",
+    "excerpt": "第三方 Cookie 退场后，如何构建可持续的第一方数据资产。",
+    "category": "tech",
+    "coverImage": "/images/illust-lightbulb.svg",
+    "author": {
+      "name": "张宇",
+      "title": "架构师",
+      "avatar": "https://randomuser.me/api/portraits/men/22.jpg"
+    },
+    "content": "<h2>后 Cookie 时代的数据困局</h2><p>随着 Chrome 正式禁用第三方 Cookie，营销人面临前所未有的数据断层。但危机中往往藏着机遇——第一方数据的价值从未如此凸显。</p><h2>四步构建数据资产</h2><ul><li><strong>采集</strong>：以价值交换为原则设计数据采集触点</li><li><strong>整合</strong>：通过 CDP 统一线上线下数据身份</li><li><strong>分析</strong>：构建客户生命周期价值模型</li><li><strong>激活</strong>：基于数据洞察驱动个性化触达</li></ul>",
+    "createdAt": "2026-02-08T02:00:00.000Z",
+    "updatedAt": "2026-02-08T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "5",
+    "slug": "real-time-bidding-ai-optimization",
+    "title": "程序化广告的 AI 优化：智能出价策略与创意动态生成",
+    "excerpt": "AI 如何重塑程序化广告的出价逻辑和创意生产流程。",
+    "category": "tech",
+    "coverImage": "/images/illust-chart.svg",
+    "author": {
+      "name": "赵晓",
+      "title": "算法工程师",
+      "avatar": "https://randomuser.me/api/portraits/women/28.jpg"
+    },
+    "content": "<h2>RTB 的智能进化</h2><p>实时竞价（RTB）正在被 AI 彻底重构。传统的规则出价正让位于深度学习驱动的预测出价模型。</p><h2>关键技术突破</h2><ul><li>多目标优化：同时优化 CTR、CVR 和 ROI</li><li>创意动态组合：AI 根据受众特征实时生成广告素材</li><li>跨渠道频次控制：避免用户在不同平台被同一广告轰炸</li></ul>",
+    "createdAt": "2026-02-08T00:00:00.000Z",
+    "updatedAt": "2026-02-08T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "6",
+    "slug": "privacy-compliant-tracking-architecture",
+    "title": "合规追踪体系搭建：GDPR 与个保法下的数据采集架构",
+    "excerpt": "在隐私法规日益严格的环境下，如何构建合规且有效的用户行为追踪体系。",
+    "category": "tech",
+    "coverImage": "/images/illust-puzzle.svg",
+    "author": {
+      "name": "林雪",
+      "title": "安全合规负责人",
+      "avatar": "https://randomuser.me/api/portraits/women/65.jpg"
+    },
+    "content": "<h2>合规不是阻碍，是信任基建</h2><p>很多营销团队将隐私合规视为限制，但换个角度看，合规体系是建立用户信任的基础设施。</p><h2>Server-side Tracking 架构</h2><p>从客户端追踪迁移到服务端追踪，是当前最佳实践：</p><ul><li>数据采集端：服务端事件 API 替代前端 SDK</li><li>数据处理层：PII 脱敏与匿名化处理</li><li>数据存储层：数据主体权利请求自动化响应</li></ul>",
+    "createdAt": "2026-02-07T22:00:00.000Z",
+    "updatedAt": "2026-02-07T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "7",
+    "slug": "attribution-model-evolution",
+    "title": "归因模型的进化：从 Last Click 到 AI 驱动的增量归因",
+    "excerpt": "传统归因模型正在失效，数据驱动的增量归因才是未来方向。",
+    "category": "tech",
+    "coverImage": "/images/illust-telescope.svg",
+    "author": {
+      "name": "黄磊",
+      "title": "数据科学家",
+      "avatar": "https://randomuser.me/api/portraits/men/45.jpg"
+    },
+    "content": "<h2>归因之困</h2><p>Last Click 归因就像只给最后一个传球的人记助攻，忽视了整条进攻链路。在多触点、跨设备的今天，这种模型已经严重失真。</p><h2>增量归因方法论</h2><ul><li>实验组/对照组设计：通过 PSA（Public Service Announcement）实验测量真实增量</li><li>因果推断模型：使用 Double ML 等方法控制混淆变量</li><li>媒体混合模型（MMM）：宏观层面评估各渠道贡献</li></ul>",
+    "createdAt": "2026-02-07T02:00:00.000Z",
+    "updatedAt": "2026-02-07T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "8",
+    "slug": "growth-loop-vs-funnel",
+    "title": "增长飞轮 vs 漏斗模型：为什么你的获客成本越来越高",
+    "excerpt": "漏斗思维正在杀死你的增长，飞轮模型才是可持续获客的答案。",
+    "category": "product",
+    "coverImage": "/images/illust-rocket.svg",
+    "author": {
+      "name": "周婷",
+      "title": "产品VP",
+      "avatar": "https://randomuser.me/api/portraits/women/52.jpg"
+    },
+    "content": "<h2>漏斗模型的结构性缺陷</h2><p>AARRR 漏斗模型统治了增长黑客领域十余年，但它有一个致命的结构性缺陷——它是线性的。每一层漏斗都在“消耗”用户，而不是“激活”用户。</p><h2>飞轮模型的核心逻辑</h2><p>增长飞轮的本质是让每一个用户都成为下一个用户的获取渠道：</p><ul><li>产品体验驱动口碑传播</li><li>用户生成内容降低获客成本</li><li>网络效应构建竞争壁垒</li></ul><h2>从漏斗到飞轮的转型路径</h2><p>第一步不是推翻漏斗，而是找到漏斗中“能量泄漏”最严重的环节，将其改造为飞轮的驱动节点。</p>",
+    "createdAt": "2026-02-07T00:00:00.000Z",
+    "updatedAt": "2026-02-07T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "9",
+    "slug": "content-marketing-roi-measurement",
+    "title": "内容营销的 ROI 困境：如何证明一篇文章值 10 万",
+    "excerpt": "内容营销最大的挑战不是创作，而是如何量化其商业价值。",
+    "category": "product",
+    "coverImage": "/images/illust-chart.svg",
+    "author": {
+      "name": "吴琳",
+      "title": "内容营销总监",
+      "avatar": "https://randomuser.me/api/portraits/women/33.jpg"
+    },
+    "content": "<h2>老板问你：这篇文章带来多少收入？</h2><p>每个内容营销人都面临过这个灵魂拷问。问题的根源在于，内容的价值往往是间接的、延迟的、多触点的。</p><h2>内容价值评估框架</h2><ul><li><strong>直接转化价值</strong>：CTA 点击、表单提交、付费转化</li><li><strong>品牌资产价值</strong>：搜索品牌词提升、社交声量增长</li><li><strong>获客成本替代价值</strong>：自然流量等价于多少付费流量</li><li><strong>销售赋能价值</strong>：内容在销售跟进中的引用频次</li></ul>",
+    "createdAt": "2026-02-06T22:00:00.000Z",
+    "updatedAt": "2026-02-06T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "10",
+    "slug": "social-listening-insight-to-action",
+    "title": "社交聆听的实战方法论：从噪音中提取可执行的用户洞察",
+    "excerpt": "社交媒体上每天产生数十亿条信息，如何从中找到真正有价值的用户声音。",
+    "category": "product",
+    "coverImage": "/images/illust-telescope.svg",
+    "author": {
+      "name": "孙鹏",
+      "title": "产品经理",
+      "avatar": "https://randomuser.me/api/portraits/men/55.jpg"
+    },
+    "content": "<h2>聆听不等于监测</h2><p>很多品牌的社交聆听停留在“品牌提及监测”阶段——有人@我了吗？有负面舆情吗？这只是聆听的冰山一角。</p><h2>深度聆听框架</h2><ul><li><strong>品类对话分析</strong>：用户在讨论你所在品类时，关注什么、抱怨什么</li><li><strong>需求信号捕捉</strong>：“有没有推荐”“求替代品”等购买意图表达</li><li><strong>情感趋势追踪</strong>：品牌情感的时间序列变化</li><li><strong>竞品声量对比</strong>：Share of Voice 的动态变化</li></ul>",
+    "createdAt": "2026-02-06T02:00:00.000Z",
+    "updatedAt": "2026-02-06T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "11",
+    "slug": "omnichannel-customer-journey-design",
+    "title": "全渠道客户旅程设计：打通线上线下的 20 个关键触点",
+    "excerpt": "客户不会按你划分的渠道来体验品牌，全渠道一致性是体验设计的核心。",
+    "category": "product",
+    "coverImage": "/images/illust-puzzle.svg",
+    "author": {
+      "name": "陈默",
+      "title": "用户体验总监",
+      "avatar": "https://randomuser.me/api/portraits/men/67.jpg"
+    },
+    "content": "<h2>渠道割裂的代价</h2><p>用户在小红书种草、在官网比价、在直播间下单、在门店退货——这是一个完整的客户旅程，但大多数品牌的这四个触点分属四个部门，数据互不相通。</p><h2>全渠道旅程地图</h2><p>绘制全渠道旅程地图的关键是识别“渠道切换时刻”——用户从一个渠道跳转到另一个渠道时，体验是否连贯、数据是否同步。</p>",
+    "createdAt": "2026-02-06T00:00:00.000Z",
+    "updatedAt": "2026-02-06T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "12",
+    "slug": "plg-product-led-growth-china",
+    "title": "PLG 在中国市场的本土化实践：产品驱动增长的水土不服与破局",
+    "excerpt": "Product-Led Growth 在中国市场面临独特挑战，但核心理念依然适用。",
+    "category": "product",
+    "coverImage": "/images/illust-lightbulb.svg",
+    "author": {
+      "name": "刘洋",
+      "title": "增长负责人",
+      "avatar": "https://randomuser.me/api/portraits/men/12.jpg"
+    },
+    "content": "<h2>PLG 的中国困境</h2><p>Slack、Notion、Figma 的 PLG 神话在硅谷被反复传颂，但当这套方法论落地中国市场时，却常常水土不服。原因有三：</p><ul><li>企业采购决策链条长，个人试用难以穿透组织</li><li>免费策略在价格敏感市场可能拉低品牌价值</li><li>社交裂变在 to B 场景中效果有限</li></ul><h2>本土化改造</h2><p>成功的中国 PLG 实践往往需要“PLG + SLG”混合模式：产品自助体验负责获客，销售团队负责扩展与续约。</p>",
+    "createdAt": "2026-02-05T22:00:00.000Z",
+    "updatedAt": "2026-02-05T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "13",
+    "slug": "user-persona-data-driven",
+    "title": "数据驱动的用户画像重构：告别拍脑袋的「假设性 Persona」",
+    "excerpt": "大多数用户画像都是虚构的理想型，真正有用的画像来自行为数据。",
+    "category": "product",
+    "coverImage": "/images/illust-brain.svg",
+    "author": {
+      "name": "赵薇",
+      "title": "用户研究员",
+      "avatar": "https://randomuser.me/api/portraits/women/18.jpg"
+    },
+    "content": "<h2>Persona 的信任危机</h2><p>“25岁的都市白领，月入2万，喜欢瑜伽和轻食”——这样的用户画像你见过太多。问题是，它们大多来自会议室的头脑风暴，而非真实的用户行为数据。</p><h2>行为聚类方法</h2><p>真正有效的用户画像应该基于：</p><ul><li>行为序列聚类：用户实际做了什么，而非他们声称自己会做什么</li><li>购买动机分析：Jobs-to-be-Done 框架下的需求拆解</li><li>渠道偏好分析：不同画像群体的触达渠道差异</li></ul>",
+    "createdAt": "2026-02-05T02:00:00.000Z",
+    "updatedAt": "2026-02-05T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "14",
+    "slug": "pricing-psychology-conversion",
+    "title": "定价心理学与转化率的隐秘关系：价格锚点的 7 种用法",
+    "excerpt": "价格不只是数字，它是用户决策的心理锚点。",
+    "category": "product",
+    "coverImage": "/images/illust-target.svg",
+    "author": {
+      "name": "钱进",
+      "title": "商业化负责人",
+      "avatar": "https://randomuser.me/api/portraits/men/76.jpg"
+    },
+    "content": "<h2>价格即信号</h2><p>行为经济学告诉我们，用户并不“理性”地评估价格，他们通过参照物来判断“贵不贵”。这就是价格锚点的力量。</p><h2>七种锚点策略</h2><ul><li>诱饵定价：加入一个“明显不划算”的选项</li><li>分拆定价：日均成本 vs 年度总价</li><li>删除线原价：制造“占便宜”的感知</li><li>竞品对标：“同类产品售价 XX”</li><li>价值换算：“相当于每天一杯咖啡”</li><li>阶梯定价：让用户自我分类</li><li>限时价格：制造稀缺性紧迫感</li></ul>",
+    "createdAt": "2026-02-05T00:00:00.000Z",
+    "updatedAt": "2026-02-05T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "15",
+    "slug": "brand-building-long-termism",
+    "title": "品牌建设的长期主义：为什么最贵的营销是追求速效",
+    "excerpt": "追求速效的营销就像信用卡消费，短期爽了，长期负债累累。",
+    "category": "thinking",
+    "coverImage": "/images/illust-telescope.svg",
+    "author": {
+      "name": "李雪晴",
+      "title": "品牌总监",
+      "avatar": "https://randomuser.me/api/portraits/women/71.jpg"
+    },
+    "content": "<h2>效果广告的甜蜜陷阱</h2><p>ROI 可衡量、效果可追踪、预算可控制——效果广告看起来完美无缺。但当你把所有预算都投入效果广告时，你其实是在“租用”流量，而非“拥有”客户。</p><h2>品牌是降低交易成本的终极工具</h2><p>经济学家科斯说，企业存在的意义是降低交易成本。品牌也是如此——一个强品牌可以降低用户的搜索成本、信任成本和决策成本。</p><h2>如何在短期压力下坚持长期品牌投入</h2><ul><li>将品牌指标纳入高管 KPI</li><li>品牌投入与效果投入的“60/40 法则”</li><li>用品牌内容降低效果广告的获客成本</li></ul>",
+    "createdAt": "2026-02-04T22:00:00.000Z",
+    "updatedAt": "2026-02-04T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "16",
+    "slug": "attention-economy-ethics",
+    "title": "注意力经济的伦理困境：我们是在服务用户还是在操控用户",
+    "excerpt": "当营销技术越来越精准，我们需要停下来想想：边界在哪里？",
+    "category": "thinking",
+    "coverImage": "/images/illust-brain.svg",
+    "author": {
+      "name": "韩冰",
+      "title": "战略顾问",
+      "avatar": "https://randomuser.me/api/portraits/men/83.jpg"
+    },
+    "content": "<h2>精准营销的暗面</h2><p>我们可以追踪用户的每一次点击、预测他们的每一个需求、在他们最脆弱的时刻推送最诱惑的广告。技术上，这都是可行的。但我们应该这么做吗？</p><h2>营销伦理的三条红线</h2><ul><li><strong>透明性</strong>：用户是否知道自己正在被追踪和分析</li><li><strong>自主性</strong>：营销是帮助用户做更好的决策，还是操控决策</li><li><strong>公平性</strong>：个性化定价是否构成价格歧视</li></ul><h2>从增长黑客到增长伦理</h2><p>下一代营销领导者需要的不仅是增长能力，更是判断“什么增长不值得追求”的伦理智慧。</p>",
+    "createdAt": "2026-02-04T02:00:00.000Z",
+    "updatedAt": "2026-02-04T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "17",
+    "slug": "ai-creativity-marketing-future",
+    "title": "当 AI 能写出 80 分的文案：营销人的不可替代性在哪里",
+    "excerpt": "AI 正在接管营销的执行层，人类的价值将重新聚焦于判断力和创造力。",
+    "category": "thinking",
+    "coverImage": "/images/illust-lightbulb.svg",
+    "author": {
+      "name": "方圆",
+      "title": "CEO",
+      "avatar": "https://randomuser.me/api/portraits/men/25.jpg"
+    },
+    "content": "<h2>AI 的能力边界</h2><p>GPT 系列模型已经能写出流畅的社交文案、SEO 文章、甚至广告脚本。但它们的输出有一个共同特征——“正确但无趣”。</p><h2>人类营销人的核心价值</h2><p>在 AI 时代，营销人的价值重新定义为：</p><ul><li><strong>洞察力</strong>：看到数据背后的人性</li><li><strong>判断力</strong>：在多个“正确”答案中选择最“对”的那个</li><li><strong>审美力</strong>：定义品牌的调性与边界</li><li><strong>同理心</strong>：理解用户未说出口的需求</li></ul>",
+    "createdAt": "2026-02-04T00:00:00.000Z",
+    "updatedAt": "2026-02-04T00:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "18",
+    "slug": "china-consumer-behavior-shift",
+    "title": "消费降级还是消费分级？中国消费者行为变迁的深层逻辑",
+    "excerpt": "不是消费者没钱了，是他们的钱花得更聪明了。",
+    "category": "thinking",
+    "coverImage": "/images/illust-megaphone.svg",
+    "author": {
+      "name": "郑伟",
+      "title": "市场VP",
+      "avatar": "https://randomuser.me/api/portraits/men/41.jpg"
+    },
+    "content": "<h2>数据背后的真相</h2><p>“消费降级”是一个过度简化的叙事。真实的图景是：消费者在不同品类上的支出策略正在分化——必需品追求极致性价比，体验型消费反而在升级。</p><h2>三种消费心智模型</h2><ul><li><strong>理性最优解</strong>：标品领域，用最少的钱买到足够好的产品</li><li><strong>情感溢价</strong>：体验领域，愿意为情绪价值付费</li><li><strong>社交货币</strong>：身份领域，消费即表达</li></ul><h2>对营销的启示</h2><p>不要问“用户愿意花多少钱”，而要问“用户在什么场景下愿意为什么价值付费”。</p>",
+    "createdAt": "2026-02-03T22:00:00.000Z",
+    "updatedAt": "2026-02-03T22:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "19",
+    "slug": "marketing-org-structure-future",
+    "title": "营销组织的未来形态：从职能型到任务型的组织变革",
+    "excerpt": "传统的营销组织架构正在成为创新的阻碍，敏捷团队模式是出路。",
+    "category": "thinking",
+    "coverImage": "/images/illust-puzzle.svg",
+    "author": {
+      "name": "许静",
+      "title": "组织发展顾问",
+      "avatar": "https://randomuser.me/api/portraits/women/90.jpg"
+    },
+    "content": "<h2>金字塔的崩塌</h2><p>品牌部、媒介部、数字部、CRM 部——传统营销组织按职能划分，每个部门都有自己的 KPI、预算和供应商。结果是：部门墙比竞争对手更难攻破。</p><h2>任务型组织设计</h2><p>先进的营销组织正在向“小前台 + 大中台”模式转型：</p><ul><li>前台：跨职能任务小组，围绕具体增长目标组建</li><li>中台：数据、内容、技术能力共享平台</li><li>后台：品牌战略、合规管理、预算规划</li></ul>",
+    "createdAt": "2026-02-03T02:00:00.000Z",
+    "updatedAt": "2026-02-03T02:00:00.000Z",
+    "published": true
+  },
+  {
+    "id": "20",
+    "slug": "storytelling-in-data-age",
+    "title": "数据时代更需要故事：为什么最好的营销仍然是讲好一个故事",
+    "excerpt": "数据告诉我们做什么，故事告诉用户为什么关心。两者缺一不可。",
+    "category": "thinking",
+    "coverImage": "/images/illust-megaphone.svg",
+    "author": {
+      "name": "谢安",
+      "title": "首席内容官",
+      "avatar": "https://randomuser.me/api/portraits/men/58.jpg"
+    },
+    "content": "<h2>数据的悖论</h2><p>我们拥有前所未有的用户数据，但品牌与用户之间的情感连接似乎在减弱。数据让我们更“精准”，却不一定更“动人”。</p><h2>叙事的神经科学</h2><p>研究表明，故事激活的大脑区域远多于事实陈述。一个好故事能同时激活：</p><ul><li>运动皮层（当描述动作时）</li><li>感觉皮层（当描述质地、气味时）</li><li>前额叶皮层（当引发共情时）</li></ul><h2>数据 + 故事 = 最强组合</h2><p>用数据找到对的人，用故事打动他的心。这才是全网洞察营销的终极形态。</p>",
+    "createdAt": "2026-02-03T00:00:00.000Z",
+    "updatedAt": "2026-02-03T00:00:00.000Z",
+    "published": true
+  }
+]

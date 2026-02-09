@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn target/bullseye - Precision/Goal -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Concentric circles -->
+    <circle cx="95" cy="100" r="55" fill="none"/>
+    <circle cx="95" cy="100" r="40" fill="none" stroke-width="1.5"/>
+    <circle cx="95" cy="100" r="25" fill="none" stroke-width="1.2"/>
+    <circle cx="95" cy="100" r="10" fill="none" stroke-width="1"/>
+    <circle cx="95" cy="100" r="3" fill="#2A2A2A"/>
+    <!-- Arrow hitting bullseye -->
+    <line x1="150" y1="55" x2="98" y2="97" stroke-width="2"/>
+    <!-- Arrow head -->
+    <path d="M98 97 L104 90" fill="none" stroke-width="1.5"/>
+    <path d="M98 97 L105 98" fill="none" stroke-width="1.5"/>
+    <!-- Arrow tail feathers -->
+    <path d="M150 55 L155 48 L148 50" fill="none" stroke-width="1.2"/>
+    <path d="M150 55 L156 55 L152 48" fill="none" stroke-width="1.2"/>
+    <!-- Small decorative dots -->
+    <circle cx="60" cy="40" r="1.5" fill="#2A2A2A"/>
+    <circle cx="140" cy="140" r="1.5" fill="#2A2A2A"/>
+    <circle cx="35" cy="120" r="1.5" fill="#2A2A2A"/>
+    <!-- Cross-hairs -->
+    <line x1="95" y1="38" x2="95" y2="45" stroke-width="1" stroke-dasharray="2 2"/>
+    <line x1="95" y1="155" x2="95" y2="162" stroke-width="1" stroke-dasharray="2 2"/>
+    <line x1="33" y1="100" x2="40" y2="100" stroke-width="1" stroke-dasharray="2 2"/>
+    <line x1="150" y1="100" x2="157" y2="100" stroke-width="1" stroke-dasharray="2 2"/>
+    <!-- Impact marks -->
+    <path d="M93 95 L90 90" fill="none" stroke-width="1"/>
+    <path d="M98 95 L102 90" fill="none" stroke-width="1"/>
+    <path d="M100 100 L105 96" fill="none" stroke-width="1"/>
+  </g>
+</svg>

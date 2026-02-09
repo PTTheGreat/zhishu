@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn rocket - Growth/Launch -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Rocket body -->
+    <path d="M100 25 C88 45 82 70 82 95 L118 95 C118 70 112 45 100 25Z" fill="none"/>
+    <!-- Nose cone detail -->
+    <path d="M94 55 L106 55" fill="none" stroke-width="1"/>
+    <!-- Window -->
+    <circle cx="100" cy="72" r="8" fill="none"/>
+    <circle cx="100" cy="72" r="4" fill="none" stroke-width="1"/>
+    <!-- Fins -->
+    <path d="M82 80 L60 105 L82 95" fill="none"/>
+    <path d="M118 80 L140 105 L118 95" fill="none"/>
+    <!-- Engine base -->
+    <rect x="85" y="95" width="30" height="12" rx="2" fill="none"/>
+    <!-- Flames -->
+    <path d="M90 107 C92 120 96 130 100 142 C104 130 108 120 110 107" fill="none"/>
+    <path d="M94 107 C96 115 98 125 100 132 C102 125 104 115 106 107" fill="none" stroke-width="1.2"/>
+    <!-- Small smoke puffs -->
+    <circle cx="88" cy="145" r="5" fill="none" stroke-width="1"/>
+    <circle cx="80" cy="152" r="7" fill="none" stroke-width="1"/>
+    <circle cx="112" cy="145" r="5" fill="none" stroke-width="1"/>
+    <circle cx="120" cy="152" r="7" fill="none" stroke-width="1"/>
+    <circle cx="100" cy="158" r="8" fill="none" stroke-width="1"/>
+    <!-- Stars around -->
+    <path d="M45 40 L47 35 L49 40 L47 42Z" fill="none" stroke-width="1"/>
+    <path d="M155 55 L157 50 L159 55 L157 57Z" fill="none" stroke-width="1"/>
+    <path d="M40 90 L42 85 L44 90 L42 92Z" fill="none" stroke-width="1"/>
+    <circle cx="160" cy="35" r="2" fill="#2A2A2A"/>
+    <circle cx="48" cy="65" r="1.5" fill="#2A2A2A"/>
+    <circle cx="155" cy="90" r="1.5" fill="#2A2A2A"/>
+  </g>
+</svg>

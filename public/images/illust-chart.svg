@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn analytics chart - Data/Growth -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Chart frame -->
+    <rect x="30" y="30" width="140" height="120" rx="4" fill="none"/>
+    <!-- Axes -->
+    <line x1="50" y1="40" x2="50" y2="135"/>
+    <line x1="50" y1="135" x2="160" y2="135"/>
+    <!-- Grid lines - light -->
+    <line x1="50" y1="110" x2="160" y2="110" stroke-width="0.5" stroke-dasharray="3 3"/>
+    <line x1="50" y1="85" x2="160" y2="85" stroke-width="0.5" stroke-dasharray="3 3"/>
+    <line x1="50" y1="60" x2="160" y2="60" stroke-width="0.5" stroke-dasharray="3 3"/>
+    <!-- Bar chart bars -->
+    <rect x="60" y="100" width="12" height="35" rx="1" fill="none"/>
+    <rect x="80" y="80" width="12" height="55" rx="1" fill="none"/>
+    <rect x="100" y="90" width="12" height="45" rx="1" fill="none"/>
+    <rect x="120" y="60" width="12" height="75" rx="1" fill="none"/>
+    <rect x="140" y="50" width="12" height="85" rx="1" fill="none"/>
+    <!-- Trend line -->
+    <path d="M66 95 L86 75 L106 82 L126 55 L146 42" fill="none" stroke-width="1.5" stroke-dasharray="0"/>
+    <!-- Arrow up -->
+    <path d="M146 42 L142 48" fill="none" stroke-width="1.2"/>
+    <path d="M146 42 L150 48" fill="none" stroke-width="1.2"/>
+    <!-- Magnifying glass overlay -->
+    <circle cx="155" cy="55" r="15" fill="none" stroke-width="1.5"/>
+    <line x1="165" y1="66" x2="175" y2="78" stroke-width="2"/>
+    <!-- Percentage -->
+    <text x="100" y="170" font-size="12" font-family="serif" fill="#2A2A2A" text-anchor="middle" stroke="none">+127%</text>
+  </g>
+</svg>

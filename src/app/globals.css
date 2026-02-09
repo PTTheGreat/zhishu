@@ -1,0 +1,323 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ───────────────────────────────────────────────────── */
+
+:root {
+  --bg-primary: #FAF9F6;
+  --border-divider: #ECECEC;
+  --border-image: #F8F8F8;
+  --text-strong: #222222;
+  --text-regular: #333333;
+  --text-secondary: #666666;
+  --text-decorative: #999999;
+  --highlight: #D97757;
+  --highlight-light: rgba(217, 119, 87, 0.08);
+  --container-width: 1440px;
+  --side-margin: 24px;
+  --content-width: 700px;
+
+  /* Font stacks */
+  --font-sans: -apple-system, "PingFang SC", "Helvetica Neue", "Noto Sans SC", Arial, sans-serif;
+  --font-serif: "Source Han Serif SC", "Source Han Serif", "Noto Serif SC", "Songti SC", serif;
+  --font-en: "Crimson Pro", Georgia, serif;
+
+  /*
+   * Font-weight scale
+   * 400 — body text, labels, descriptions
+   * 500 — sub-headings, emphasis, nav links
+   * 600 — card titles, section sub-titles
+   * 700 — page titles, hero headings
+   */
+}
+
+/* ─── Tailwind v4 theme extensions ────────────────────────────────────── */
+
+@theme inline {
+  --color-bg-primary: #FAF9F6;
+  --color-border-divider: #ECECEC;
+  --color-border-image: #F8F8F8;
+  --color-text-strong: #222222;
+  --color-text-regular: #333333;
+  --color-text-secondary: #666666;
+  --color-text-decorative: #999999;
+  --color-highlight: #D97757;
+}
+
+/* ─── Base styles ─────────────────────────────────────────────────────── */
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-regular);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Title font — Source Han Serif / 思源宋体 */
+.font-title {
+  font-family: var(--font-serif) !important;
+}
+
+/* English display font — Crimson Pro */
+.font-en {
+  font-family: var(--font-en) !important;
+}
+
+/* ─── Highlight hover utility ─────────────────────────────────────────── */
+
+.hover-highlight {
+  transition: color 0.2s ease;
+}
+.hover-highlight:hover {
+  color: var(--highlight) !important;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 3px;
+}
+
+/* ─── Article content styles ──────────────────────────────────────────── */
+
+.article-content {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--text-regular);
+}
+
+.article-content h1 {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-strong);
+  margin: 40px 0 20px;
+  line-height: 1.4;
+}
+
+.article-content h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-strong);
+  margin: 36px 0 16px;
+  line-height: 1.4;
+}
+
+.article-content h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-strong);
+  margin: 28px 0 12px;
+  line-height: 1.5;
+}
+
+.article-content p {
+  margin: 16px 0;
+}
+
+.article-content ul,
+.article-content ol {
+  margin: 16px 0;
+  padding-left: 24px;
+}
+
+.article-content li {
+  margin: 8px 0;
+  list-style: disc;
+}
+
+.article-content ol li {
+  list-style: decimal;
+}
+
+.article-content img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 24px 0;
+}
+
+.article-content blockquote {
+  border-left: 3px solid var(--highlight);
+  padding-left: 16px;
+  margin: 20px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.article-content a {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.article-content a:hover {
+  color: var(--highlight);
+}
+
+.article-content strong {
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+/* ─── Tiptap editor ───────────────────────────────────────────────────── */
+
+.tiptap-editor .ProseMirror {
+  outline: none;
+  min-height: 500px;
+  padding: 24px 0;
+  font-weight: 400;
+}
+
+.tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: var(--text-decorative);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap-editor .ProseMirror h1,
+.tiptap-editor .ProseMirror h2,
+.tiptap-editor .ProseMirror h3 {
+  font-family: var(--font-serif);
+  color: var(--text-strong);
+  line-height: 1.4;
+}
+
+.tiptap-editor .ProseMirror h1 { font-size: 28px; font-weight: 700; margin: 32px 0 16px; }
+.tiptap-editor .ProseMirror h2 { font-size: 22px; font-weight: 600; margin: 28px 0 14px; }
+.tiptap-editor .ProseMirror h3 { font-size: 18px; font-weight: 600; margin: 24px 0 12px; }
+.tiptap-editor .ProseMirror p { margin: 12px 0; line-height: 1.8; }
+.tiptap-editor .ProseMirror ul,
+.tiptap-editor .ProseMirror ol { padding-left: 24px; margin: 12px 0; }
+.tiptap-editor .ProseMirror li { margin: 6px 0; list-style: disc; }
+.tiptap-editor .ProseMirror ol li { list-style: decimal; }
+.tiptap-editor .ProseMirror blockquote {
+  border-left: 3px solid var(--highlight);
+  padding-left: 16px;
+  margin: 16px 0;
+  color: var(--text-secondary);
+}
+.tiptap-editor .ProseMirror img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin: 16px 0;
+}
+.tiptap-editor .ProseMirror a {
+  color: var(--highlight);
+  text-decoration: underline;
+}
+
+/* Bubble menu styles */
+.bubble-menu {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 10px;
+  background: white;
+  border: 1px solid var(--border-divider);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.bubble-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.bubble-menu button:hover {
+  background: var(--highlight-light);
+  color: var(--highlight);
+}
+.bubble-menu button.is-active {
+  background: var(--highlight-light);
+  color: var(--highlight);
+}
+
+/* Slash command menu styles */
+.slash-menu {
+  padding: 6px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid var(--border-divider);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  min-width: 220px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.slash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.slash-menu-item:hover,
+.slash-menu-item.is-selected {
+  background: var(--highlight-light);
+}
+.slash-menu-item-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.slash-menu-item-text {
+  font-size: 13px;
+  color: var(--text-regular);
+  font-weight: 500;
+}
+.slash-menu-item-desc {
+  font-size: 11px;
+  color: var(--text-decorative);
+  font-weight: 400;
+}
+
+/* Task list */
+.tiptap-editor ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+}
+.tiptap-editor ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  list-style: none;
+}
+.tiptap-editor ul[data-type="taskList"] li label {
+  margin-top: 3px;
+}
+.tiptap-editor ul[data-type="taskList"] li input[type="checkbox"] {
+  accent-color: var(--highlight);
+}

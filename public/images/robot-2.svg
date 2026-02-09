@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#F5F5F0"/>
+  <!-- Big robot -->
+  <rect x="120" y="60" width="90" height="100" rx="8" stroke="#222" stroke-width="2.5" fill="none"/>
+  <rect x="130" y="25" width="70" height="40" rx="6" stroke="#222" stroke-width="2.5" fill="none"/>
+  <!-- Antenna -->
+  <line x1="165" y1="25" x2="165" y2="10" stroke="#222" stroke-width="2.5"/>
+  <circle cx="165" cy="6" r="4" stroke="#222" stroke-width="2" fill="none"/>
+  <!-- Eyes -->
+  <circle cx="150" cy="42" r="5" fill="#222"/>
+  <circle cx="180" cy="42" r="5" fill="#222"/>
+  <!-- Mouth -->
+  <path d="M150 55 Q165 62 180 55" stroke="#222" stroke-width="2" fill="none"/>
+  <!-- Arms -->
+  <line x1="120" y1="90" x2="95" y2="120" stroke="#222" stroke-width="2.5"/>
+  <line x1="210" y1="90" x2="235" y2="115" stroke="#222" stroke-width="2.5"/>
+  <!-- Hand pointing down to small robot -->
+  <line x1="235" y1="115" x2="245" y2="125" stroke="#222" stroke-width="2.5"/>
+  <!-- Legs -->
+  <line x1="145" y1="160" x2="140" y2="200" stroke="#222" stroke-width="2.5"/>
+  <line x1="185" y1="160" x2="190" y2="200" stroke="#222" stroke-width="2.5"/>
+  <ellipse cx="137" cy="205" rx="10" ry="4" stroke="#222" stroke-width="2" fill="none"/>
+  <ellipse cx="193" cy="205" rx="10" ry="4" stroke="#222" stroke-width="2" fill="none"/>
+  <!-- Small robot -->
+  <rect x="250" y="170" width="50" height="60" rx="5" stroke="#222" stroke-width="2" fill="none"/>
+  <rect x="256" y="148" width="38" height="25" rx="4" stroke="#222" stroke-width="2" fill="none"/>
+  <!-- Small antenna -->
+  <line x1="275" y1="148" x2="275" y2="140" stroke="#222" stroke-width="2"/>
+  <circle cx="275" cy="137" r="3" stroke="#222" stroke-width="1.5" fill="none"/>
+  <!-- Small eyes -->
+  <circle cx="268" cy="158" r="3" fill="#222"/>
+  <circle cx="282" cy="158" r="3" fill="#222"/>
+  <!-- Small legs -->
+  <line x1="265" y1="230" x2="263" y2="252" stroke="#222" stroke-width="2"/>
+  <line x1="285" y1="230" x2="287" y2="252" stroke="#222" stroke-width="2"/>
+  <ellipse cx="261" cy="256" rx="7" ry="3" stroke="#222" stroke-width="1.5" fill="none"/>
+  <ellipse cx="289" cy="256" rx="7" ry="3" stroke="#222" stroke-width="1.5" fill="none"/>
+  <!-- Chest panel -->
+  <rect x="140" y="85" width="50" height="25" rx="3" stroke="#222" stroke-width="1.5" fill="none"/>
+  <circle cx="155" cy="97" r="4" stroke="#222" stroke-width="1" fill="none"/>
+  <circle cx="175" cy="97" r="4" stroke="#222" stroke-width="1" fill="none"/>
+</svg>

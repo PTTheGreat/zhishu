@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn lightbulb - Insight/Idea -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Bulb shape - slightly wobbly for hand-drawn feel -->
+    <path d="M100 30 C75 30 55 50 55 75 C55 95 65 105 75 118 C78 123 80 130 80 135 L120 135 C120 130 122 123 125 118 C135 105 145 95 145 75 C145 50 125 30 100 30Z" fill="none"/>
+    <!-- Filament -->
+    <path d="M88 80 C92 70 96 85 100 72 C104 85 108 70 112 80" fill="none"/>
+    <!-- Base -->
+    <line x1="82" y1="140" x2="118" y2="140"/>
+    <line x1="84" y1="146" x2="116" y2="146"/>
+    <line x1="86" y1="152" x2="114" y2="152"/>
+    <path d="M92 152 L92 158 Q100 164 108 158 L108 152" fill="none"/>
+    <!-- Rays -->
+    <line x1="100" y1="16" x2="100" y2="24"/>
+    <line x1="60" y1="28" x2="66" y2="35"/>
+    <line x1="140" y1="28" x2="134" y2="35"/>
+    <line x1="40" y1="60" x2="48" y2="63"/>
+    <line x1="160" y1="60" x2="152" y2="63"/>
+    <line x1="35" y1="85" x2="44" y2="84"/>
+    <line x1="165" y1="85" x2="156" y2="84"/>
+    <!-- Small sparkles -->
+    <path d="M155 40 L158 35 L161 40 L158 45Z" fill="none" stroke-width="1"/>
+    <path d="M42 45 L45 40 L48 45 L45 50Z" fill="none" stroke-width="1"/>
+  </g>
+</svg>

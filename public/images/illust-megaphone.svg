@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn megaphone - Marketing/Broadcast -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Megaphone body -->
+    <path d="M45 80 L45 120 L80 120 L140 155 L140 45 L80 80 Z" fill="none"/>
+    <!-- Megaphone opening -->
+    <ellipse cx="140" cy="100" rx="6" ry="55" fill="none"/>
+    <!-- Handle -->
+    <rect x="50" y="120" width="20" height="30" rx="3" fill="none"/>
+    <!-- Sound waves -->
+    <path d="M155 80 C162 85 165 95 165 100 C165 105 162 115 155 120" fill="none" stroke-width="1.5"/>
+    <path d="M163 68 C174 78 178 92 178 100 C178 108 174 122 163 132" fill="none" stroke-width="1.2"/>
+    <path d="M170 56 C185 70 190 88 190 100 C190 112 185 130 170 144" fill="none" stroke-width="1"/>
+    <!-- Small decorative notes -->
+    <circle cx="168" cy="55" r="3" fill="none" stroke-width="1"/>
+    <line x1="171" y1="55" x2="171" y2="45"/>
+    <circle cx="178" cy="145" r="3" fill="none" stroke-width="1"/>
+    <line x1="181" y1="145" x2="181" y2="135"/>
+    <!-- Stars -->
+    <path d="M30 60 L32 55 L34 60 L32 62Z" fill="none" stroke-width="1"/>
+    <path d="M35 140 L37 135 L39 140 L37 142Z" fill="none" stroke-width="1"/>
+  </g>
+</svg>

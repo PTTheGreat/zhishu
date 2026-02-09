@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn brain with connections - Thinking/Strategy -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Left hemisphere -->
+    <path d="M95 50 C70 48 55 60 52 75 C48 90 55 105 60 112 C55 118 52 128 58 138 C64 148 78 152 90 148 L95 148" fill="none"/>
+    <!-- Right hemisphere -->
+    <path d="M105 50 C130 48 145 60 148 75 C152 90 145 105 140 112 C145 118 148 128 142 138 C136 148 122 152 110 148 L105 148" fill="none"/>
+    <!-- Center line -->
+    <path d="M100 50 L100 148" fill="none" stroke-width="1" stroke-dasharray="4 3"/>
+    <!-- Brain folds - left -->
+    <path d="M62 75 C72 72 85 78 95 75" fill="none" stroke-width="1.2"/>
+    <path d="M58 92 C70 88 82 95 95 90" fill="none" stroke-width="1.2"/>
+    <path d="M60 110 C72 106 84 112 95 108" fill="none" stroke-width="1.2"/>
+    <path d="M65 128 C75 124 85 130 95 126" fill="none" stroke-width="1.2"/>
+    <!-- Brain folds - right -->
+    <path d="M105 75 C115 78 128 72 138 75" fill="none" stroke-width="1.2"/>
+    <path d="M105 90 C118 95 130 88 142 92" fill="none" stroke-width="1.2"/>
+    <path d="M105 108 C116 112 128 106 140 110" fill="none" stroke-width="1.2"/>
+    <path d="M105 126 C115 130 125 124 135 128" fill="none" stroke-width="1.2"/>
+    <!-- Connection nodes around -->
+    <circle cx="40" cy="55" r="4" fill="none" stroke-width="1.2"/>
+    <line x1="44" y1="55" x2="55" y2="62" stroke-width="1" stroke-dasharray="2 2"/>
+    <circle cx="160" cy="55" r="4" fill="none" stroke-width="1.2"/>
+    <line x1="156" y1="55" x2="145" y2="62" stroke-width="1" stroke-dasharray="2 2"/>
+    <circle cx="35" cy="130" r="4" fill="none" stroke-width="1.2"/>
+    <line x1="39" y1="130" x2="55" y2="130" stroke-width="1" stroke-dasharray="2 2"/>
+    <circle cx="165" cy="130" r="4" fill="none" stroke-width="1.2"/>
+    <line x1="161" y1="130" x2="145" y2="130" stroke-width="1" stroke-dasharray="2 2"/>
+    <!-- Top antenna / neural signal -->
+    <path d="M100 50 L100 35 C100 30 105 28 108 32" fill="none" stroke-width="1.2"/>
+    <circle cx="100" cy="28" r="3" fill="none" stroke-width="1"/>
+    <!-- Small dots -->
+    <circle cx="48" cy="40" r="1.5" fill="#2A2A2A"/>
+    <circle cx="152" cy="40" r="1.5" fill="#2A2A2A"/>
+    <circle cx="30" cy="100" r="1.5" fill="#2A2A2A"/>
+    <circle cx="170" cy="100" r="1.5" fill="#2A2A2A"/>
+  </g>
+</svg>

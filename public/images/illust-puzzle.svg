@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Hand-drawn puzzle pieces - Strategy/Combination -->
+  <g stroke="#2A2A2A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Piece 1 (top-left) -->
+    <path d="M40 40 L85 40 L85 55 C78 55 75 62 80 68 C85 62 82 55 85 55 L85 40 L85 85 L70 85 C70 78 63 75 57 80 C63 85 70 82 70 85 L40 85 Z" fill="none"/>
+    <!-- Piece 2 (top-right) -->
+    <path d="M95 40 L140 40 L140 85 L125 85 C125 78 118 75 112 80 C118 85 125 82 125 85 L95 85 L95 55 C88 55 85 62 90 68 C95 62 92 55 95 55 Z" fill="none"/>
+    <!-- Piece 3 (bottom-left) -->
+    <path d="M40 95 L70 95 C70 88 63 85 57 90 C63 95 70 92 70 95 L85 95 L85 140 L40 140 Z" fill="none"/>
+    <!-- Piece 4 (bottom-right, slightly separated) -->
+    <g transform="translate(8, 8)">
+      <path d="M95 95 L125 95 C125 88 118 85 112 90 C118 95 125 92 125 95 L140 95 L140 140 L95 140 L95 110 C88 110 85 117 90 123 C95 117 92 110 95 110 Z" fill="none"/>
+    </g>
+    <!-- Motion lines for piece 4 -->
+    <line x1="148" y1="98" x2="155" y2="95" stroke-width="1" stroke-dasharray="2 2"/>
+    <line x1="150" y1="105" x2="158" y2="103" stroke-width="1" stroke-dasharray="2 2"/>
+    <line x1="148" y1="112" x2="156" y2="111" stroke-width="1" stroke-dasharray="2 2"/>
+    <!-- Question mark -->
+    <text x="160" y="85" font-size="16" font-family="serif" fill="#2A2A2A" stroke="none">?</text>
+    <!-- Small decorative -->
+    <circle cx="30" cy="30" r="1.5" fill="#2A2A2A"/>
+    <circle cx="155" cy="150" r="1.5" fill="#2A2A2A"/>
+  </g>
+</svg>
