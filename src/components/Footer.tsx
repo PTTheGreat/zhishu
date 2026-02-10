@@ -1,21 +1,23 @@
 'use client';
 
 import Link from 'next/link';
+import { useT } from '@/i18n/context';
 
 export default function Footer() {
-  /* Only include link groups that have at least one real (non-#) link */
+  const t = useT();
+
   const linkGroups = [
     {
-      title: '产品',
+      title: t.footer.product,
       links: [
-        { label: '功能介绍', href: '/#features' },
-        { label: '使用场景', href: '/#cases' },
+        { label: t.footer.featuresIntro, href: '/#features' },
+        { label: t.footer.useCases, href: '/#cases' },
       ],
     },
     {
-      title: '资源',
+      title: t.footer.resources,
       links: [
-        { label: '博客', href: '/blog' },
+        { label: t.nav.blog, href: '/blog' },
       ],
     },
   ];
@@ -48,10 +50,10 @@ export default function Footer() {
                   fontFamily: 'var(--font-serif)',
                 }}
               >
-                值
+                {t.common.brandIcon}
               </div>
               <span style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-strong)', fontFamily: 'var(--font-serif)' }}>
-                值数
+                {t.common.brand}
               </span>
             </div>
             <p
@@ -63,12 +65,11 @@ export default function Footer() {
                 maxWidth: '300px',
               }}
             >
-              全网内容洞察平台。覆盖 30+ 内容平台，通过 AI
-              实时分析全网数据，帮助品牌发现趋势、评估达人、监测声量，让每一个营销决策都有据可依。
+              {t.footer.brandDesc}
             </p>
           </div>
 
-          {/* Link columns — only real links */}
+          {/* Link columns */}
           {linkGroups.map((group) => (
             <div key={group.title}>
               <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-strong)' }}>
@@ -94,7 +95,7 @@ export default function Footer() {
       <div style={{ borderTop: '1px solid var(--border-divider)' }}>
         <div className="footer-bottom">
           <div style={{ fontSize: '12px', color: 'var(--text-decorative)' }}>
-            &copy; {new Date().getFullYear()} 值数科技（ZhiShu Tech）. All rights reserved.
+            &copy; {new Date().getFullYear()} {t.footer.copyright}
           </div>
         </div>
       </div>

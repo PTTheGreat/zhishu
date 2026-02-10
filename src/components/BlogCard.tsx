@@ -1,10 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { Post, CATEGORY_COLORS, CATEGORY_LABELS } from '@/lib/types';
+import { Post, CATEGORY_COLORS } from '@/lib/types';
+import { useT, useLocale } from '@/i18n/context';
 
 export default function BlogCard({ post }: { post: Post }) {
+  const t = useT();
+  const locale = useLocale();
+
   const date = new Date(post.createdAt)
-    .toLocaleDateString('zh-CN', {
+    .toLocaleDateString(locale === 'zh' ? 'zh-CN' : 'en-US', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
@@ -12,7 +18,7 @@ export default function BlogCard({ post }: { post: Post }) {
     .replace(/\//g, '-');
 
   const bgColor = CATEGORY_COLORS[post.category] || '#F0F0EC';
-  const label = CATEGORY_LABELS[post.category] || post.category;
+  const label = (t.categories as Record<string, string>)[post.category] || post.category;
 
   return (
     <Link href={`/blog/${post.slug}`} className="group" style={{ display: 'block', textDecoration: 'none' }}>

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useT } from '@/i18n/context';
 
-/* ─── Scene data ──────────────────────────────────────────────────────── */
+/* ─── Scene data type ─────────────────────────────────────────────────── */
 
 interface Scene {
   query: string;
@@ -12,62 +13,6 @@ interface Scene {
   actions: string[];
 }
 
-const SCENES: Scene[] = [
-  {
-    query: '分析「完美日记」近 7 天全网声量',
-    data: [
-      { platform: '小红书', count: '12,847' },
-      { platform: '抖音', count: '8,392' },
-      { platform: '微博', count: '5,621' },
-      { platform: 'B站', count: '2,104' },
-      { platform: '知乎', count: '1,538' },
-    ],
-    analysis: [
-      '情感分布：正面 68.3% · 中性 24.1% · 负面 7.6%',
-      '热词提取：#新色号 #联名款 #学生党 #平替 #圣诞限定',
-      '品牌提及增量：较上周 +23.1%，主要由抖音短视频驱动',
-      'KOL 关联：头部达人「程十安」提及带来 34% 的声量峰值',
-    ],
-    predictions: [
-      { label: '未来 7 日声量预测', value: '+18.5%', trend: 'up' },
-      { label: '情感正向率趋势', value: '72.1%', trend: 'up' },
-      { label: '潜在舆情风险', value: '低', trend: 'down' },
-    ],
-    actions: [
-      '建议在抖音追加 15% 预算，该渠道 ROI 最高',
-      '联名款话题可策划 UGC 活动，借势当前热度',
-      '关注负面评论中"色差"问题，建议产品团队跟进',
-    ],
-  },
-  {
-    query: '评估达人「美妆小鱼」的合作价值',
-    data: [
-      { platform: '粉丝量', count: '328 万' },
-      { platform: '近 30 日作品', count: '24 篇' },
-      { platform: '平均互动', count: '8,432' },
-      { platform: '品牌合作', count: '12 次' },
-      { platform: '真粉率', count: '94.2%' },
-    ],
-    analysis: [
-      '内容风格：美妆教程 62% · 好物推荐 28% · 日常 Vlog 10%',
-      '粉丝画像：女性 89% | 18-25 岁 42% | 一线城市 58%',
-      '互动质量评分：92/100（远超同级达人均值 71）',
-      '商业内容自然度：A 级 — 广告与内容融合度高',
-    ],
-    predictions: [
-      { label: '预估合作 CPE', value: '¥2.8', trend: 'down' },
-      { label: '预估 ROI', value: '3.2x', trend: 'up' },
-      { label: '粉丝增长趋势', value: '+5.4%/月', trend: 'up' },
-    ],
-    actions: [
-      '推荐合作形式：好物推荐视频 + 评论区置顶',
-      '最佳发布时段：周二/周四 19:00-21:00',
-      '预算建议：单条 ¥35,000，3 条打包 ¥90,000',
-    ],
-  },
-];
-
-const PHASE_LABELS = ['数据采集', '智能分析', '趋势预测', '策略处置'];
 const PHASE_ICONS = ['◉', '◎', '◈', '▸'];
 
 /* ─── Timings (ms) ────────────────────────────────────────────────────── */
@@ -82,6 +27,10 @@ const SCENE_PAUSE = 2500;
 /* ─── Component ───────────────────────────────────────────────────────── */
 
 export default function HeroDemo() {
+  const t = useT();
+  const SCENES: Scene[] = t.heroDemo.scenes as unknown as Scene[];
+  const PHASE_LABELS = t.heroDemo.phases as unknown as string[];
+
   const [sceneIdx, setSceneIdx] = useState(0);
   const [phase, setPhase] = useState(-1); // -1=typing query, 0-3=phases
   const [typedQuery, setTypedQuery] = useState('');
@@ -124,7 +73,7 @@ export default function HeroDemo() {
     setFade(true);
 
     const s = SCENES[sceneIdx];
-    let elapsed = 300; // initial delay
+    let elapsed = 300;
 
     /* Phase -1: Type the query */
     const queryChars = s.query.split('');
@@ -146,16 +95,14 @@ export default function HeroDemo() {
     /* Phase 1: Analysis — stream each line character by character */
     addTimer(() => setPhase(1), elapsed);
     elapsed += 200;
-    s.analysis.forEach((line, lineIdx) => {
+    s.analysis.forEach((line) => {
       const lineStart = elapsed;
-      // Stream each character of this line
       const chars = line.split('');
       chars.forEach((_, charIdx) => {
         addTimer(() => {
           setCurrentAnalysisText(line.slice(0, charIdx + 1));
         }, lineStart + charIdx * ANALYSIS_LINE_SPEED);
       });
-      // When line is done, push it to completed lines
       const lineEnd = lineStart + chars.length * ANALYSIS_LINE_SPEED + 100;
       addTimer(() => {
         setAnalysisLines((prev) => [...prev, line]);
@@ -187,6 +134,7 @@ export default function HeroDemo() {
     }, elapsed + SCENE_PAUSE);
 
     return clearTimers;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sceneIdx, clearTimers, resetState, addTimer]);
 
   return (
@@ -260,7 +208,7 @@ export default function HeroDemo() {
                 flex: 1,
               }}
             >
-              {typedQuery || '输入品牌、达人或话题...'}
+              {typedQuery || t.heroDemo.placeholder}
               {phase === -1 && typedQuery && (
                 <span
                   style={{
@@ -424,7 +372,7 @@ export default function HeroDemo() {
                     {p.value}
                   </div>
                   <div style={{ fontSize: '11px', color: p.trend === 'up' ? '#22c55e' : 'var(--highlight)', marginTop: '2px' }}>
-                    {p.trend === 'up' ? '↑ 上升趋势' : '↓ 利好'}
+                    {p.trend === 'up' ? t.heroDemo.trendUp : t.heroDemo.trendDown}
                   </div>
                 </div>
               ))}

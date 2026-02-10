@@ -1,6 +1,7 @@
 'use client';
 
-import { CATEGORIES } from '@/lib/types';
+import { CATEGORY_SLUGS } from '@/lib/types';
+import { useT } from '@/i18n/context';
 
 interface SidebarProps {
   activeCategory: string;
@@ -8,6 +9,13 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeCategory, onCategoryChange }: SidebarProps) {
+  const t = useT();
+
+  /** Resolve category slug to its i18n label. */
+  const catLabel = (slug: string) => {
+    return (t.categories as Record<string, string>)[slug] || slug;
+  };
+
   return (
     <aside style={{ width: '200px', flexShrink: 0, paddingRight: '32px' }}>
       <h1
@@ -16,22 +24,20 @@ export default function Sidebar({ activeCategory, onCategoryChange }: SidebarPro
       >
         Blog
       </h1>
-      <p style={{ marginTop: '10px', fontSize: '13px', lineHeight: 1.65, color: 'var(--text-secondary)' }}>
-        全网洞察营销，
-        <br />
-        先行者的思考与实践。
+      <p style={{ marginTop: '10px', fontSize: '13px', lineHeight: 1.65, color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>
+        {t.blog.sidebarTagline}
       </p>
 
       <nav style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {CATEGORIES.map((cat) => (
+        {CATEGORY_SLUGS.map((slug) => (
           <button
-            key={cat.id}
-            onClick={() => onCategoryChange(cat.slug)}
+            key={slug}
+            onClick={() => onCategoryChange(slug)}
             style={{
               textAlign: 'left',
               fontSize: '14px',
-              color: activeCategory === cat.slug ? 'var(--text-strong)' : 'var(--text-secondary)',
-              fontWeight: activeCategory === cat.slug ? 600 : 400,
+              color: activeCategory === slug ? 'var(--text-strong)' : 'var(--text-secondary)',
+              fontWeight: activeCategory === slug ? 600 : 400,
               background: 'none',
               border: 'none',
               cursor: 'pointer',
@@ -39,7 +45,7 @@ export default function Sidebar({ activeCategory, onCategoryChange }: SidebarPro
               transition: 'color 0.2s',
             }}
           >
-            {cat.name}
+            {catLabel(slug)}
           </button>
         ))}
       </nav>

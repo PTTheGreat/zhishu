@@ -11,7 +11,8 @@ import HighlightExt from '@tiptap/extension-highlight';
 import CharacterCount from '@tiptap/extension-character-count';
 import TaskList from '@tiptap/extension-task-list';
 import TaskItem from '@tiptap/extension-task-item';
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
+import { useT } from '@/i18n/context';
 
 interface TiptapEditorProps {
   content?: string;
@@ -27,75 +28,12 @@ interface SlashItem {
   action: (editor: ReturnType<typeof useEditor>) => void;
 }
 
-const SLASH_COMMANDS: SlashItem[] = [
-  {
-    label: '标题 1',
-    desc: '大标题',
-    icon: 'H1',
-    action: (editor) => editor?.chain().focus().toggleHeading({ level: 1 }).run(),
-  },
-  {
-    label: '标题 2',
-    desc: '中标题',
-    icon: 'H2',
-    action: (editor) => editor?.chain().focus().toggleHeading({ level: 2 }).run(),
-  },
-  {
-    label: '标题 3',
-    desc: '小标题',
-    icon: 'H3',
-    action: (editor) => editor?.chain().focus().toggleHeading({ level: 3 }).run(),
-  },
-  {
-    label: '无序列表',
-    desc: '创建项目符号列表',
-    icon: '•',
-    action: (editor) => editor?.chain().focus().toggleBulletList().run(),
-  },
-  {
-    label: '有序列表',
-    desc: '创建编号列表',
-    icon: '1.',
-    action: (editor) => editor?.chain().focus().toggleOrderedList().run(),
-  },
-  {
-    label: '待办列表',
-    desc: '创建任务清单',
-    icon: '☑',
-    action: (editor) => editor?.chain().focus().toggleTaskList().run(),
-  },
-  {
-    label: '引用',
-    desc: '插入引用块',
-    icon: '"',
-    action: (editor) => editor?.chain().focus().toggleBlockquote().run(),
-  },
-  {
-    label: '代码块',
-    desc: '插入代码片段',
-    icon: '<>',
-    action: (editor) => editor?.chain().focus().toggleCodeBlock().run(),
-  },
-  {
-    label: '分割线',
-    desc: '插入水平线',
-    icon: '—',
-    action: (editor) => editor?.chain().focus().setHorizontalRule().run(),
-  },
-  {
-    label: '图片',
-    desc: '通过 URL 插入图片',
-    icon: '🖼',
-    action: (editor) => {
-      const url = window.prompt('输入图片 URL');
-      if (url) editor?.chain().focus().setImage({ src: url }).run();
-    },
-  },
-];
+const SLASH_ICONS = ['H1', 'H2', 'H3', '•', '1.', '☑', '"', '<>', '—', '🖼'];
 
 /* ─── Main Editor Component ───────────────────────────────────────────── */
 
 export default function TiptapEditor({ content = '', onChange }: TiptapEditorProps) {
+  const t = useT();
   const [slashOpen, setSlashOpen] = useState(false);
   const [slashFilter, setSlashFilter] = useState('');
   const [slashIdx, setSlashIdx] = useState(0);
@@ -106,6 +44,32 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
   const [showToolbar, setShowToolbar] = useState(false);
   const [toolbarPos, setToolbarPos] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
   const editorContainerRef = useRef<HTMLDivElement>(null);
+
+  /** Build slash commands from the i18n dictionary. */
+  const SLASH_COMMANDS: SlashItem[] = useMemo(() => {
+    const slashLabels = t.tiptap.slash as unknown as { label: string; desc: string }[];
+    const actions: ((editor: ReturnType<typeof useEditor>) => void)[] = [
+      (editor) => editor?.chain().focus().toggleHeading({ level: 1 }).run(),
+      (editor) => editor?.chain().focus().toggleHeading({ level: 2 }).run(),
+      (editor) => editor?.chain().focus().toggleHeading({ level: 3 }).run(),
+      (editor) => editor?.chain().focus().toggleBulletList().run(),
+      (editor) => editor?.chain().focus().toggleOrderedList().run(),
+      (editor) => editor?.chain().focus().toggleTaskList().run(),
+      (editor) => editor?.chain().focus().toggleBlockquote().run(),
+      (editor) => editor?.chain().focus().toggleCodeBlock().run(),
+      (editor) => editor?.chain().focus().setHorizontalRule().run(),
+      (editor) => {
+        const url = window.prompt(t.tiptap.imagePrompt);
+        if (url) editor?.chain().focus().setImage({ src: url }).run();
+      },
+    ];
+    return slashLabels.map((item, i) => ({
+      label: item.label,
+      desc: item.desc,
+      icon: SLASH_ICONS[i],
+      action: actions[i],
+    }));
+  }, [t]);
 
   const editor = useEditor({
     immediatelyRender: false,
@@ -123,9 +87,9 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
       Placeholder.configure({
         placeholder: ({ node }) => {
           if (node.type.name === 'heading') {
-            return `标题 ${node.attrs.level}`;
+            return `${t.tiptap.headingPlaceholder} ${node.attrs.level}`;
           }
-          return '输入 / 呼出命令菜单...';
+          return t.tiptap.placeholder;
         },
       }),
       TextAlign.configure({
@@ -192,7 +156,6 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
         setShowToolbar(false);
         return;
       }
-      // Get selection coords
       const coords = ed.view.coordsAtPos(from);
       const endCoords = ed.view.coordsAtPos(to);
       const containerRect = editorContainerRef.current.getBoundingClientRect();
@@ -287,19 +250,20 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
   const setLink = useCallback(() => {
     if (!editor) return;
     const previousUrl = editor.getAttributes('link').href;
-    const url = window.prompt('输入链接 URL', previousUrl);
+    const url = window.prompt(t.tiptap.linkPrompt, previousUrl);
     if (url === null) return;
     if (url === '') {
       editor.chain().focus().extendMarkRange('link').unsetLink().run();
       return;
     }
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
-  }, [editor]);
+  }, [editor, t]);
 
   if (!editor) return null;
 
   const chars = editor.storage.characterCount.characters();
   const words = editor.storage.characterCount.words();
+  const tooltips = t.tiptap.tooltips;
 
   return (
     <div className="tiptap-editor" style={{ position: 'relative' }} ref={editorContainerRef}>
@@ -317,46 +281,46 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
           <button
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={editor.isActive('bold') ? 'is-active' : ''}
-            title="粗体"
+            title={tooltips.bold}
           >
             <BoldIcon />
           </button>
           <button
             onClick={() => editor.chain().focus().toggleItalic().run()}
             className={editor.isActive('italic') ? 'is-active' : ''}
-            title="斜体"
+            title={tooltips.italic}
           >
             <ItalicIcon />
           </button>
           <button
             onClick={() => editor.chain().focus().toggleUnderline().run()}
             className={editor.isActive('underline') ? 'is-active' : ''}
-            title="下划线"
+            title={tooltips.underline}
           >
             <UnderlineIcon />
           </button>
           <button
             onClick={() => editor.chain().focus().toggleStrike().run()}
             className={editor.isActive('strike') ? 'is-active' : ''}
-            title="删除线"
+            title={tooltips.strike}
           >
             <StrikeIcon />
           </button>
           <button
             onClick={() => editor.chain().focus().toggleCode().run()}
             className={editor.isActive('code') ? 'is-active' : ''}
-            title="行内代码"
+            title={tooltips.code}
           >
             <CodeIcon />
           </button>
           <button
             onClick={() => editor.chain().focus().toggleHighlight().run()}
             className={editor.isActive('highlight') ? 'is-active' : ''}
-            title="高亮"
+            title={tooltips.highlight}
           >
             <HighlightIcon />
           </button>
-          <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''} title="链接">
+          <button onClick={setLink} className={editor.isActive('link') ? 'is-active' : ''} title={tooltips.link}>
             <LinkIcon />
           </button>
         </div>
@@ -410,10 +374,10 @@ export default function TiptapEditor({ content = '', onChange }: TiptapEditorPro
           color: 'var(--text-decorative)',
         }}
       >
-        <span>{chars} 字符</span>
-        <span>{words} 词</span>
+        <span>{chars} {t.tiptap.charCount}</span>
+        <span>{words} {t.tiptap.wordCount}</span>
         <span style={{ marginLeft: 'auto', fontSize: '11px' }}>
-          输入 <kbd style={{ padding: '1px 4px', borderRadius: '3px', border: '1px solid var(--border-divider)', fontSize: '11px', fontFamily: 'var(--font-en)' }}>/</kbd> 呼出命令菜单 · 选中文字出现格式工具栏
+          {t.tiptap.footerHint}
         </span>
       </div>
     </div>

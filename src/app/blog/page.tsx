@@ -6,6 +6,7 @@ import BlogCard from '@/components/BlogCard';
 import Pagination from '@/components/Pagination';
 import Link from 'next/link';
 import { Post } from '@/lib/types';
+import { useT } from '@/i18n/context';
 
 const POSTS_PER_PAGE = 9;
 
@@ -14,6 +15,7 @@ export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('latest');
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const t = useT();
 
   const fetchPosts = useCallback(async () => {
     setLoading(true);
@@ -80,18 +82,18 @@ export default function BlogPage() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            写文章
+            {t.blog.writePost}
           </Link>
         </div>
 
         <div className="blog-main">
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 0' }}>
-              <div style={{ fontSize: '14px', color: 'var(--text-decorative)' }}>加载中...</div>
+              <div style={{ fontSize: '14px', color: 'var(--text-decorative)' }}>{t.blog.loading}</div>
             </div>
           ) : paginatedPosts.length === 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 0' }}>
-              <div style={{ fontSize: '14px', color: 'var(--text-decorative)' }}>暂无文章</div>
+              <div style={{ fontSize: '14px', color: 'var(--text-decorative)' }}>{t.blog.noArticles}</div>
             </div>
           ) : (
             <>
@@ -121,15 +123,15 @@ export default function BlogPage() {
           }}
         >
           <div style={{ maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
-            <h2 className="section-heading">订阅值数洞察周刊</h2>
+            <h2 className="section-heading">{t.blog.subscribeTitle}</h2>
             <p className="section-desc" style={{ marginTop: '12px' }}>
-              每周精选全网营销趋势、达人动态、品牌案例，直送你的邮箱。已有 8,000+ 营销人订阅。
+              {t.blog.subscribeDesc}
             </p>
 
             <div className="subscribe-form" style={{ marginTop: '24px' }}>
               <input
                 type="email"
-                placeholder="输入你的工作邮箱"
+                placeholder={t.blog.subscribePlaceholder}
                 style={{
                   flex: 1,
                   borderRadius: '12px',
@@ -154,12 +156,12 @@ export default function BlogPage() {
                   cursor: 'pointer',
                 }}
               >
-                订阅
+                {t.blog.subscribeBtn}
               </button>
             </div>
 
             <p style={{ marginTop: '12px', fontSize: '12px', color: 'var(--text-decorative)' }}>
-              无垃圾邮件，随时退订。
+              {t.blog.subscribeDisclaimer}
             </p>
           </div>
         </div>

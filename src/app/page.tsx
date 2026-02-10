@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import HeroDemo from '@/components/HeroDemo';
+import { useT } from '@/i18n/context';
 
 /* ======================================================================
-   值数 — 全网内容洞察平台  |  产品官网首页
+   值数 / ZhiShu — 全网内容洞察平台  |  产品官网首页
    ====================================================================== */
 
 export default function HomePage() {
@@ -23,6 +24,8 @@ export default function HomePage() {
 /* ─── Hero ─────────────────────────────────────────────────────────────── */
 
 function HeroSection() {
+  const t = useT();
+
   return (
     <section className="relative">
       <div
@@ -58,7 +61,7 @@ function HeroSection() {
           }}
         >
           <span style={{ display: 'inline-block', width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e' }} />
-          全网数据实时更新中
+          {t.hero.badge}
         </div>
 
         <h1
@@ -72,9 +75,9 @@ function HeroSection() {
             margin: '0 auto',
           }}
         >
-          全网内容洞察，
+          {t.hero.titleLine1}
           <br />
-          让品牌决策有「数」可依
+          {t.hero.titleLine2}
         </h1>
 
         <p
@@ -84,8 +87,7 @@ function HeroSection() {
             margin: '20px auto 0',
           }}
         >
-          值数覆盖小红书、抖音、微博、知乎、B站等 30+ 内容平台，
-          通过 AI 实时抓取与分析全网内容，帮助品牌发现趋势、评估达人、监测声量。
+          {t.hero.desc}
         </p>
 
         {/* CTA buttons */}
@@ -103,7 +105,7 @@ function HeroSection() {
               transition: 'opacity 0.2s',
             }}
           >
-            免费开始使用
+            {t.hero.ctaPrimary}
           </Link>
           <Link
             href="#features"
@@ -117,7 +119,7 @@ function HeroSection() {
               textDecoration: 'none',
             }}
           >
-            查看功能介绍
+            {t.hero.ctaSecondary}
           </Link>
         </div>
 
@@ -133,11 +135,13 @@ function HeroSection() {
 /* ─── Stats Bar ────────────────────────────────────────────────────────── */
 
 function StatsBar() {
+  const t = useT();
+
   const stats = [
-    { value: '30+', label: '覆盖内容平台' },
-    { value: '1亿+', label: '日均抓取内容' },
-    { value: '500万+', label: '达人数据库' },
-    { value: '2000+', label: '品牌客户' },
+    { value: '30+', label: t.stats.platforms },
+    { value: locale100M(), label: t.stats.dailyCrawl },
+    { value: locale5M(), label: t.stats.kolDb },
+    { value: '2000+', label: t.stats.clients },
   ];
 
   return (
@@ -167,6 +171,10 @@ function StatsBar() {
   );
 }
 
+/** Locale-aware stat values that differ in format */
+function locale100M() { return '1亿+'; }
+function locale5M() { return '500万+'; }
+
 /* ─── Features: 数据 / 分析 / 预测 / 处置 ─────────────────────────────── */
 
 /*
@@ -175,20 +183,10 @@ function StatsBar() {
  * Abstract forms that hint at the concept without being literal.
  */
 
-const MODULES = [
+const MODULE_VISUAL = [
   {
-    tag: '数据',
     tagColor: '#2A6496',
     tagBg: '#E4EEF5',
-    title: '全网内容采集引擎',
-    desc: '覆盖主流内容与社交平台，实时获取海量非结构化数据，为后续分析奠定基础。',
-    capabilities: [
-      { label: '30+ 平台实时抓取', detail: '小红书、抖音、微博、知乎、B站、快手等全渠道覆盖' },
-      { label: '多形态内容采集', detail: '图文、短视频、直播回放、评论区、弹幕一网打尽' },
-      { label: '日均 1 亿+ 条', detail: '分布式采集架构，数据延迟低于 5 分钟' },
-      { label: '合规采集', detail: '支持 GDPR / 个保法，数据脱敏与授权管理' },
-    ],
-    /* Data: scattered nodes converging to a central hub via thin lines */
     illustration: (
       <svg viewBox="0 0 200 160" fill="none" width="200" height="160">
         <circle cx="40" cy="36" r="3" fill="#9DB8CE" />
@@ -211,18 +209,8 @@ const MODULES = [
     ),
   },
   {
-    tag: '分析',
     tagColor: '#7C6BB5',
     tagBg: '#ECE8F4',
-    title: 'AI 语义分析引擎',
-    desc: '基于大语言模型的深度内容理解能力，将非结构化数据转化为可量化的洞察维度。',
-    capabilities: [
-      { label: '情感分析', detail: '正面 / 负面 / 中性三维度 + 细粒度情绪识别' },
-      { label: '实体识别', detail: '品牌 / 产品 / 达人 / 竞品自动提取与关联' },
-      { label: '话题聚类', detail: '热点话题自动发现、归类与趋势追踪' },
-      { label: 'KOL/KOC 评估', detail: '真粉率、互动质量、商业价值多维评分' },
-    ],
-    /* Analysis: horizontal bars of different lengths + a prism/diamond shape */
     illustration: (
       <svg viewBox="0 0 200 160" fill="none" width="200" height="160">
         <rect x="36" y="44" width="72" height="6" rx="3" fill="#D5CEED" />
@@ -239,18 +227,8 @@ const MODULES = [
     ),
   },
   {
-    tag: '预测',
     tagColor: '#22863a',
     tagBg: '#e6f4ea',
-    title: '趋势预测引擎',
-    desc: '运用时序模型与深度学习，在变化发生之前捕捉信号，帮助品牌抢占先机。',
-    capabilities: [
-      { label: '声量走势预测', detail: '基于时序模型预判未来 7-30 天趋势变化' },
-      { label: '爆款内容预判', detail: '识别具备病毒传播潜力的内容特征' },
-      { label: '达人增长预测', detail: '粉丝增速、互动衰减曲线建模' },
-      { label: '舆情风险预警', detail: '负面传播概率评估，提前 4+ 小时预警' },
-    ],
-    /* Prediction: ascending curve + dashed projection */
     illustration: (
       <svg viewBox="0 0 200 160" fill="none" width="200" height="160">
         <line x1="32" y1="128" x2="172" y2="128" stroke="#C2D8C7" strokeWidth="0.5" />
@@ -266,30 +244,18 @@ const MODULES = [
     ),
   },
   {
-    tag: '处置',
     tagColor: '#A67C52',
     tagBg: '#F3ECDF',
-    title: '智能决策引擎',
-    desc: '将数据洞察转化为可执行的策略建议，闭环驱动品牌营销行动。',
-    capabilities: [
-      { label: '投放策略推荐', detail: '达人组合优化、预算分配建议' },
-      { label: '内容策略生成', detail: '基于洞察自动生成内容 brief 与选题方向' },
-      { label: '舆情响应方案', detail: '预置应对 SOP，负面事件一键启动' },
-      { label: '智能报告输出', detail: 'AI 生成周报 / 月报，一键导出 PPT' },
-    ],
-    /* Action: stacked card outlines with small check circles */
     illustration: (
       <svg viewBox="0 0 200 160" fill="none" width="200" height="160">
         <rect x="48" y="28" width="108" height="28" rx="6" stroke="#C4B09A" strokeWidth="0.75" />
         <circle cx="66" cy="42" r="5" stroke="#C4B09A" strokeWidth="0.75" />
         <polyline points="63,42 65.5,44.5 69,40" stroke="#B5A08A" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
         <line x1="80" y1="42" x2="140" y2="42" stroke="#D8CBBC" strokeWidth="0.75" />
-
         <rect x="48" y="66" width="108" height="28" rx="6" stroke="#C4B09A" strokeWidth="0.75" />
         <circle cx="66" cy="80" r="5" stroke="#C4B09A" strokeWidth="0.75" />
         <polyline points="63,80 65.5,82.5 69,78" stroke="#B5A08A" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
         <line x1="80" y1="80" x2="132" y2="80" stroke="#D8CBBC" strokeWidth="0.75" />
-
         <rect x="48" y="104" width="108" height="28" rx="6" stroke="#C4B09A" strokeWidth="0.75" />
         <circle cx="66" cy="118" r="5" stroke="#C4B09A" strokeWidth="0.75" fill="none" />
         <line x1="80" y1="118" x2="120" y2="118" stroke="#D8CBBC" strokeWidth="0.75" />
@@ -299,21 +265,25 @@ const MODULES = [
 ];
 
 function FeaturesSection() {
+  const t = useT();
+  const modules = t.features.modules;
+
   return (
     <section id="features" className="section-pad">
       <div style={{ maxWidth: 'var(--container-width)', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ textAlign: 'center' }}>
-          <div className="section-eyebrow">核心能力</div>
+          <div className="section-eyebrow">{t.features.eyebrow}</div>
           <h2 className="section-heading">
-            数据 → 分析 → 预测 → 处置，全链路闭环
+            {t.features.heading}
           </h2>
           <p className="section-desc" style={{ margin: '14px auto 0', maxWidth: '540px' }}>
-            值数以四大引擎为核心，帮助品牌从海量内容中提取洞察，并转化为可落地的营销策略
+            {t.features.desc}
           </p>
         </div>
 
         <div style={{ marginTop: '80px', display: 'flex', flexDirection: 'column', gap: '80px', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
-          {MODULES.map((mod, idx) => {
+          {modules.map((mod, idx) => {
+            const visual = MODULE_VISUAL[idx];
             const reversed = idx % 2 === 1;
             return (
               <div
@@ -328,11 +298,11 @@ function FeaturesSection() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     borderRadius: '20px',
-                    background: mod.tagBg,
+                    background: visual.tagBg,
                     border: '1px solid var(--border-divider)',
                   }}
                 >
-                  {mod.illustration}
+                  {visual.illustration}
                 </div>
 
                 {/* Text */}
@@ -344,8 +314,8 @@ function FeaturesSection() {
                       borderRadius: '9999px',
                       fontSize: '12px',
                       fontWeight: 600,
-                      color: mod.tagColor,
-                      background: mod.tagBg,
+                      color: visual.tagColor,
+                      background: visual.tagBg,
                     }}
                   >
                     {mod.tag}
@@ -376,8 +346,11 @@ function FeaturesSection() {
 
 /* ─── Workflow: SVG icons for each step ────────────────────────────────── */
 
+const STEP_COLORS = ['#2A6496', '#7C6BB5', '#22863a', '#A67C52'];
+const STEP_ICON_TYPES = ['data', 'analysis', 'predict', 'action'];
+
 function WorkflowIcon({ type, color }: { type: string; color: string }) {
-  const muted = color + '40'; // 25% opacity
+  const muted = color + '40';
   if (type === 'data') {
     return (
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -425,24 +398,20 @@ function WorkflowIcon({ type, color }: { type: string; color: string }) {
 }
 
 function InsightsSection() {
-  const steps = [
-    { step: '01', title: '数据采集', desc: '30+ 平台图文、短视频、直播、评论一站式采集', iconType: 'data', color: '#2A6496' },
-    { step: '02', title: '智能分析', desc: 'AI 情感分析、实体识别、话题聚类、KOL 评估', iconType: 'analysis', color: '#7C6BB5' },
-    { step: '03', title: '趋势预测', desc: '声量预测、爆款预判、风险预警，提前布局', iconType: 'predict', color: '#22863a' },
-    { step: '04', title: '策略处置', desc: '投放建议、内容 brief、舆情 SOP、自动报告', iconType: 'action', color: '#A67C52' },
-  ];
+  const t = useT();
+  const steps = t.workflow.steps;
 
   return (
     <section id="insights" className="section-pad" style={{ borderTop: '1px solid var(--border-divider)' }}>
       <div style={{ maxWidth: 'var(--container-width)', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ textAlign: 'center' }}>
-          <div className="section-eyebrow">工作流程</div>
-          <h2 className="section-heading">四步闭环，从数据到决策</h2>
+          <div className="section-eyebrow">{t.workflow.eyebrow}</div>
+          <h2 className="section-heading">{t.workflow.heading}</h2>
         </div>
 
         <div className="workflow-grid" style={{ marginTop: '64px', maxWidth: '900px', marginLeft: 'auto', marginRight: 'auto' }}>
           {steps.map((s, i) => (
-            <div key={s.step} style={{ position: 'relative', textAlign: 'center' }}>
+            <div key={i} style={{ position: 'relative', textAlign: 'center' }}>
               {i < 3 && (
                 <div
                   className="workflow-connector"
@@ -467,13 +436,13 @@ function InsightsSection() {
                   justifyContent: 'center',
                   borderRadius: '16px',
                   background: 'white',
-                  border: `1.5px solid ${s.color}30`,
+                  border: `1.5px solid ${STEP_COLORS[i]}30`,
                 }}
               >
-                <WorkflowIcon type={s.iconType} color={s.color} />
+                <WorkflowIcon type={STEP_ICON_TYPES[i]} color={STEP_COLORS[i]} />
               </div>
               <div className="font-en" style={{ fontSize: '11px', fontWeight: 600, color: 'var(--text-decorative)', letterSpacing: '0.08em', marginBottom: '8px' }}>
-                STEP {s.step}
+                STEP {String(i + 1).padStart(2, '0')}
               </div>
               <h3 className="card-title">{s.title}</h3>
               <p style={{ marginTop: '8px', fontSize: '13px', fontWeight: 400, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
@@ -489,28 +458,27 @@ function InsightsSection() {
 
 /* ─── Use Cases ────────────────────────────────────────────────────────── */
 
+const CASE_COLORS = ['#E4EEF5', '#F3ECDF', '#ECE8F4'];
+
 function CasesSection() {
-  const cases = [
-    { title: '新品上市洞察', desc: '在新品上市前，通过全网内容分析找到目标用户的真实需求、竞品的内容策略空白、以及最具种草力的内容形态。', metrics: ['需求洞察准确率 92%', '上市周期缩短 40%'], color: '#E4EEF5' },
-    { title: '达人营销优化', desc: '基于数据筛选达人、评估合作效果、优化投放组合。告别「投了就完」的粗放模式，每一分预算都花在刀刃上。', metrics: ['CPE 降低 35%', '互动增量 2.3 倍'], color: '#F3ECDF' },
-    { title: '舆情风险管理', desc: '7×24 小时监测品牌提及，AI 自动判断情感倾向与传播风险等级，在舆情发酵前发出预警，赢得黄金应对时间。', metrics: ['预警提前 4 小时', '处理效率提升 60%'], color: '#ECE8F4' },
-  ];
+  const t = useT();
+  const items = t.cases.items;
 
   return (
     <section id="cases" className="section-pad" style={{ borderTop: '1px solid var(--border-divider)' }}>
       <div style={{ maxWidth: 'var(--container-width)', margin: '0 auto', padding: '0 24px' }}>
         <div style={{ textAlign: 'center' }}>
-          <div className="section-eyebrow">使用场景</div>
-          <h2 className="section-heading">各行业品牌都在用值数</h2>
+          <div className="section-eyebrow">{t.cases.eyebrow}</div>
+          <h2 className="section-heading">{t.cases.heading}</h2>
         </div>
 
         <div className="cases-grid" style={{ marginTop: '64px', maxWidth: '1080px', marginLeft: 'auto', marginRight: 'auto' }}>
-          {cases.map((c) => (
+          {items.map((c, i) => (
             <div
               key={c.title}
               style={{ overflow: 'hidden', borderRadius: '16px', border: '1px solid var(--border-divider)', background: 'white' }}
             >
-              <div style={{ background: c.color, minHeight: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+              <div style={{ background: CASE_COLORS[i] || '#F0F0EC', minHeight: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
                 <div style={{ borderRadius: '12px', background: 'rgba(255,255,255,0.6)', padding: '16px 24px', textAlign: 'center', backdropFilter: 'blur(4px)' }}>
                   <div className="card-title">{c.title}</div>
                 </div>
@@ -541,15 +509,17 @@ function CasesSection() {
 /* ─── CTA ──────────────────────────────────────────────────────────────── */
 
 function CtaSection() {
+  const t = useT();
+
   return (
     <section id="cta" className="section-pad">
       <div style={{ maxWidth: '800px', margin: '0 auto', padding: '0 24px' }}>
         <div className="cta-box" style={{ textAlign: 'center', background: 'var(--text-strong)' }}>
           <h2 className="section-heading cta-heading" style={{ color: '#fff' }}>
-            开始用数据驱动你的品牌决策
+            {t.cta.heading}
           </h2>
           <p style={{ maxWidth: '420px', margin: '14px auto 0', fontSize: '15px', fontWeight: 400, lineHeight: 1.75, color: 'rgba(255,255,255,0.65)' }}>
-            免费试用 14 天，无需信用卡。体验全网内容洞察的力量。
+            {t.cta.desc}
           </p>
           <div className="cta-buttons" style={{ marginTop: '32px' }}>
             <button
@@ -564,7 +534,7 @@ function CtaSection() {
                 cursor: 'pointer',
               }}
             >
-              免费试用
+              {t.cta.primary}
             </button>
             <button
               style={{
@@ -578,11 +548,11 @@ function CtaSection() {
                 cursor: 'pointer',
               }}
             >
-              预约演示
+              {t.cta.secondary}
             </button>
           </div>
           <p style={{ marginTop: '24px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
-            已有 2000+ 品牌在使用值数
+            {t.cta.social}
           </p>
         </div>
       </div>

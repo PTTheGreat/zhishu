@@ -2,21 +2,28 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { getLocale } from '@/i18n/server';
+import { getDictionary } from '@/i18n/context';
+import { LocaleProvider } from '@/i18n/context';
 
-export const metadata: Metadata = {
-  title: '值数 — 全网内容洞察平台',
-  description:
-    '覆盖 30+ 内容平台，通过 AI 实时分析全网数据，帮助品牌发现趋势、评估达人、监测声量。',
-  keywords: ['内容洞察', 'KOL分析', '品牌监测', '社交聆听', '营销数据', '值数'],
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const dict = getDictionary(locale);
+  return {
+    title: dict.meta.title,
+    description: dict.meta.description,
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html lang="zh-CN">
+    <html lang={locale === 'zh' ? 'zh-CN' : 'en'}>
       <head>
         {/* 思源宋体 (Source Han Serif) via Google Fonts CDN (Noto Serif SC) + Crimson Pro */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,9 +34,11 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <LocaleProvider locale={locale}>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   );

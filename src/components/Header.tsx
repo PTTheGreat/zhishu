@@ -3,17 +3,42 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-
-const navLinks = [
-  { label: '功能', href: '/#features' },
-  { label: '资源', href: '/#insights' },
-  { label: '活动', href: '/#cases' },
-  { label: '博客', href: '/blog' },
-];
+import { useT, useLocale } from '@/i18n/context';
 
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const t = useT();
+  const locale = useLocale();
+
+  const navLinks = [
+    { label: t.nav.features, href: '/#features' },
+    { label: t.nav.resources, href: '/#insights' },
+    { label: t.nav.cases, href: '/#cases' },
+    { label: t.nav.blog, href: '/blog' },
+  ];
+
+  /** Switch locale by toggling subdomain (production) or ?lang= (dev). */
+  const switchLocale = () => {
+    const target = locale === 'zh' ? 'en' : 'zh';
+    if (typeof window === 'undefined') return;
+    const { hostname, protocol, port, pathname: p, search } = window.location;
+
+    // Production: switch subdomain
+    const parts = hostname.split('.');
+    if (parts.length >= 2 && (parts[0] === 'zh' || parts[0] === 'en')) {
+      parts[0] = target;
+      window.location.href = `${protocol}//${parts.join('.')}${port ? ':' + port : ''}${p}${search}`;
+      return;
+    }
+
+    // Dev: use ?lang= param
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', target);
+    // Also set cookie so it persists
+    document.cookie = `locale=${target};path=/;max-age=${60 * 60 * 24 * 30};samesite=lax`;
+    window.location.href = url.toString();
+  };
 
   return (
     <header
@@ -52,7 +77,7 @@ export default function Header() {
               fontFamily: 'var(--font-serif)',
             }}
           >
-            值
+            {t.common.brandIcon}
           </div>
           <span
             style={{
@@ -63,7 +88,7 @@ export default function Header() {
               fontFamily: 'var(--font-serif)',
             }}
           >
-            值数
+            {t.common.brand}
           </span>
         </Link>
 
@@ -71,7 +96,7 @@ export default function Header() {
         <button
           className="header-hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="菜单"
+          aria-label={t.nav.menu}
         >
           {menuOpen ? (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -106,6 +131,25 @@ export default function Header() {
             );
           })}
 
+          {/* Language Switcher */}
+          <button
+            onClick={switchLocale}
+            style={{
+              fontSize: '13px',
+              fontWeight: 500,
+              padding: '4px 10px',
+              borderRadius: '6px',
+              border: '1px solid var(--border-divider)',
+              background: 'none',
+              color: 'var(--text-secondary)',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {locale === 'zh' ? 'EN' : '中'}
+          </button>
+
           <Link
             href="/#cta"
             onClick={() => setMenuOpen(false)}
@@ -121,7 +165,7 @@ export default function Header() {
               textAlign: 'center',
             }}
           >
-            免费试用
+            {t.nav.trialCta}
           </Link>
         </nav>
       </div>

@@ -4,26 +4,22 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import TiptapEditor from '@/components/TiptapEditor';
+import { useT } from '@/i18n/context';
 
-const CATEGORIES = [
-  { value: 'tech', label: '技术' },
-  { value: 'product', label: '产品' },
-  { value: 'thinking', label: '思考' },
-];
-
-const COVER_IMAGES = [
-  { value: '/images/illust-lightbulb.svg', label: '灯泡·洞察' },
-  { value: '/images/illust-megaphone.svg', label: '喇叭·营销' },
-  { value: '/images/illust-chart.svg', label: '图表·数据' },
-  { value: '/images/illust-rocket.svg', label: '火箭·增长' },
-  { value: '/images/illust-brain.svg', label: '大脑·思考' },
-  { value: '/images/illust-telescope.svg', label: '望远镜·洞察' },
-  { value: '/images/illust-target.svg', label: '靶心·目标' },
-  { value: '/images/illust-puzzle.svg', label: '拼图·策略' },
+const COVER_IMAGE_VALUES = [
+  '/images/illust-lightbulb.svg',
+  '/images/illust-megaphone.svg',
+  '/images/illust-chart.svg',
+  '/images/illust-rocket.svg',
+  '/images/illust-brain.svg',
+  '/images/illust-telescope.svg',
+  '/images/illust-target.svg',
+  '/images/illust-puzzle.svg',
 ];
 
 export default function EditorPage() {
   const router = useRouter();
+  const t = useT();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [category, setCategory] = useState('tech');
@@ -34,13 +30,21 @@ export default function EditorPage() {
   const [saved, setSaved] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
+  const CATEGORIES = [
+    { value: 'tech', label: t.categories.tech },
+    { value: 'product', label: t.categories.product },
+    { value: 'thinking', label: t.categories.thinking },
+  ];
+
+  const coverLabels = t.editor.coverLabels as unknown as string[];
+
   const handlePublish = async () => {
     if (!title.trim()) {
-      alert('请输入文章标题');
+      alert(t.editor.alertTitleRequired);
       return;
     }
     if (!content.trim() || content === '<p></p>') {
-      alert('请输入文章内容');
+      alert(t.editor.alertContentRequired);
       return;
     }
 
@@ -55,7 +59,7 @@ export default function EditorPage() {
           category,
           coverImage,
           author: {
-            name: authorName || '匿名',
+            name: authorName || (t === (await import('@/i18n/zh')).default ? '匿名' : 'Anonymous'),
             title: authorTitle || '',
             avatar: '',
           },
@@ -69,10 +73,10 @@ export default function EditorPage() {
         }, 1500);
       } else {
         const err = await res.json();
-        alert(err.error || '发布失败');
+        alert(err.error || 'Error');
       }
     } catch {
-      alert('网络错误，请重试');
+      alert(t.editor.alertNetworkError);
     } finally {
       setSaving(false);
     }
@@ -105,7 +109,7 @@ export default function EditorPage() {
             textDecoration: 'none',
           }}
         >
-          ← 返回博客
+          {t.editor.backToBlog}
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -128,7 +132,7 @@ export default function EditorPage() {
               <circle cx="12" cy="12" r="3" />
               <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
             </svg>
-            设置
+            {t.editor.settings}
           </button>
           <button
             onClick={handlePublish}
@@ -146,7 +150,7 @@ export default function EditorPage() {
               transition: 'opacity 0.2s',
             }}
           >
-            {saving ? '发布中...' : saved ? '已发布 ✓' : '发布文章'}
+            {saving ? t.editor.publishing : saved ? t.editor.published : t.editor.publish}
           </button>
         </div>
       </div>
@@ -167,7 +171,7 @@ export default function EditorPage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="输入文章标题..."
+            placeholder={t.editor.titlePlaceholder}
             className="font-title"
             style={{
               width: '100%',
@@ -203,7 +207,7 @@ export default function EditorPage() {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-strong)' }}>
-                文章设置
+                {t.editor.articleSettings}
               </h3>
               <button
                 onClick={() => setShowSettings(false)}
@@ -216,13 +220,13 @@ export default function EditorPage() {
             {/* Author */}
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
-                作者
+                {t.editor.author}
               </label>
               <input
                 type="text"
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
-                placeholder="输入作者名"
+                placeholder={t.editor.authorPlaceholder}
                 style={{
                   width: '100%',
                   borderRadius: '8px',
@@ -239,13 +243,13 @@ export default function EditorPage() {
             {/* Author Title */}
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
-                职位
+                {t.editor.jobTitle}
               </label>
               <input
                 type="text"
                 value={authorTitle}
                 onChange={(e) => setAuthorTitle(e.target.value)}
-                placeholder="例：CEO、产品VP"
+                placeholder={t.editor.jobTitlePlaceholder}
                 style={{
                   width: '100%',
                   borderRadius: '8px',
@@ -262,7 +266,7 @@ export default function EditorPage() {
             {/* Category */}
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
-                分类
+                {t.editor.categoryLabel}
               </label>
               <select
                 value={category}
@@ -289,13 +293,13 @@ export default function EditorPage() {
             {/* Cover image */}
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
-                封面图
+                {t.editor.coverImage}
               </label>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                {COVER_IMAGES.map((img) => (
+                {COVER_IMAGE_VALUES.map((val, idx) => (
                   <button
-                    key={img.value}
-                    onClick={() => setCoverImage(img.value)}
+                    key={val}
+                    onClick={() => setCoverImage(val)}
                     style={{
                       display: 'flex',
                       flexDirection: 'column',
@@ -303,7 +307,7 @@ export default function EditorPage() {
                       gap: '4px',
                       padding: '10px 6px',
                       borderRadius: '8px',
-                      border: coverImage === img.value
+                      border: coverImage === val
                         ? '2px solid var(--highlight)'
                         : '1px solid var(--border-divider)',
                       background: 'white',
@@ -318,13 +322,13 @@ export default function EditorPage() {
                         height: '40px',
                         borderRadius: '6px',
                         background: '#F5F5F0',
-                        backgroundImage: `url(${img.value})`,
+                        backgroundImage: `url(${val})`,
                         backgroundSize: 'contain',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
                       }}
                     />
-                    {img.label}
+                    {coverLabels[idx] || ''}
                   </button>
                 ))}
               </div>
@@ -333,7 +337,7 @@ export default function EditorPage() {
             {/* Cover image URL */}
             <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'block', marginBottom: '6px', fontSize: '12px', fontWeight: 500, color: 'var(--text-secondary)' }}>
-                或输入封面图 URL
+                {t.editor.coverImageUrl}
               </label>
               <input
                 type="text"
@@ -364,11 +368,11 @@ export default function EditorPage() {
                 color: 'var(--text-secondary)',
               }}
             >
-              <strong style={{ color: 'var(--highlight)' }}>编辑器快捷操作</strong>
+              <strong style={{ color: 'var(--highlight)' }}>{t.editor.editorTips}</strong>
               <ul style={{ marginTop: '6px', paddingLeft: '16px' }}>
-                <li>输入 <kbd style={{ padding: '1px 4px', borderRadius: '3px', border: '1px solid var(--border-divider)', fontSize: '11px' }}>/</kbd> 呼出命令菜单</li>
-                <li>选中文字出现浮动格式工具栏</li>
-                <li>支持 Markdown 快捷键（## + 空格 = H2）</li>
+                <li><kbd style={{ padding: '1px 4px', borderRadius: '3px', border: '1px solid var(--border-divider)', fontSize: '11px' }}>/</kbd> {t.editor.tipSlash}</li>
+                <li>{t.editor.tipSelect}</li>
+                <li>{t.editor.tipMarkdown}</li>
               </ul>
             </div>
           </aside>
