@@ -1,17 +1,13 @@
 import { NextResponse } from 'next/server';
+import { translatePostSummaries } from '@/lib/translate';
 
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
   const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
+  const results: Record<string, unknown> = { ts: Date.now(), hasKey: !!apiKey };
 
-  if (!apiKey) {
-    return NextResponse.json({
-      status: 'error',
-      message: 'GOOGLE_TRANSLATE_API_KEY not found in environment',
-    });
-  }
-
+  // Test 1: Direct Google API call
   try {
     const res = await fetch(
       `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
@@ -19,37 +15,38 @@ export async function GET() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          q: ['你好世界'],
+          q: ['你好世界', '测试标题'],
           source: 'zh-CN',
           target: 'en',
           format: 'text',
         }),
       }
     );
-
     const data = await res.json();
-
-    if (!res.ok) {
-    return NextResponse.json({
-      status: 'error',
-      httpStatus: res.status,
-      apiKeyPrefix: apiKey.substring(0, 10) + '...',
-      errorResponse: data,
-      ts: Date.now(),
-    }, { headers: { 'Cache-Control': 'no-store' } });
-    }
-
-    return NextResponse.json({
-      status: 'ok',
-      apiKeyPrefix: apiKey.substring(0, 10) + '...',
-      input: '你好世界',
-      output: data?.data?.translations?.[0]?.translatedText,
-      ts: Date.now(),
-    }, { headers: { 'Cache-Control': 'no-store' } });
+    results.directApi = {
+      ok: res.ok,
+      status: res.status,
+      translations: data?.data?.translations?.map((t: { translatedText: string }) => t.translatedText),
+      error: !res.ok ? data?.error?.message : undefined,
+    };
   } catch (err) {
-    return NextResponse.json({
-      status: 'error',
-      message: err instanceof Error ? err.message : 'Unknown error',
-    });
+    results.directApi = { error: err instanceof Error ? err.message : 'failed' };
   }
+
+  // Test 2: Batch translate via our utility
+  try {
+    const fakePosts = [
+      { id: 'test-1', title: '语义搜索时代的 SEO 策略', excerpt: '搜索引擎正在进化' },
+      { id: 'test-2', title: '增长飞轮 vs 漏斗模型', excerpt: '漏斗思维正在杀死增长' },
+    ];
+    const map = await translatePostSummaries(fakePosts, 'en');
+    results.batchUtil = {
+      input: fakePosts.map(p => p.title),
+      output: fakePosts.map(p => map.get(p.id)?.title || 'NOT FOUND'),
+    };
+  } catch (err) {
+    results.batchUtil = { error: err instanceof Error ? err.message : 'failed' };
+  }
+
+  return NextResponse.json(results, { headers: { 'Cache-Control': 'no-store' } });
 }
