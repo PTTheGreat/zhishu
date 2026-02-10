@@ -42,41 +42,35 @@ function writeCache(cache: CacheMap) {
   }
 }
 
-/** Call OpenAI to translate text. */
-async function translateWithOpenAI(text: string, field: string): Promise<string> {
-  const apiKey = process.env.OPENAI_API_KEY;
+/** Call Google Cloud Translation API v2 to translate text. */
+async function translateWithGoogle(text: string, targetLang: string): Promise<string> {
+  const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
   if (!apiKey) {
-    throw new Error('OPENAI_API_KEY is not configured');
+    throw new Error('GOOGLE_TRANSLATE_API_KEY is not configured');
   }
 
-  const systemPrompt = field === 'content'
-    ? 'You are a professional translator. Translate the following Chinese HTML content into natural, fluent English. Preserve all HTML tags exactly. Only output the translated HTML, nothing else.'
-    : 'You are a professional translator. Translate the following Chinese text into natural, fluent English. Only output the translation, nothing else.';
-
-  const res = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
-    },
-    body: JSON.stringify({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: text },
-      ],
-      temperature: 0.3,
-      max_tokens: 4096,
-    }),
-  });
+  // Google Translate API v2 supports HTML via format=html
+  const res = await fetch(
+    `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        q: text,
+        source: 'zh-CN',
+        target: targetLang === 'en' ? 'en' : targetLang,
+        format: 'html', // preserves HTML tags in content
+      }),
+    }
+  );
 
   if (!res.ok) {
     const err = await res.text();
-    throw new Error(`OpenAI API error: ${res.status} ${err}`);
+    throw new Error(`Google Translate API error: ${res.status} ${err}`);
   }
 
   const data = await res.json();
-  return data.choices?.[0]?.message?.content?.trim() || text;
+  return data?.data?.translations?.[0]?.translatedText || text;
 }
 
 export async function POST(request: NextRequest) {
@@ -101,10 +95,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Check if OpenAI key is configured
-    if (!process.env.OPENAI_API_KEY) {
+    // Check if Google Translate key is configured
+    if (!process.env.GOOGLE_TRANSLATE_API_KEY) {
       return NextResponse.json({
-        error: 'OPENAI_API_KEY not configured. Set it in your environment variables.',
+        error: 'GOOGLE_TRANSLATE_API_KEY not configured. Set it in your environment variables.',
         title,
         excerpt,
         content,
@@ -112,11 +106,12 @@ export async function POST(request: NextRequest) {
       }, { status: 503 });
     }
 
-    // Translate all fields
+    // Translate all fields via Google Cloud Translation
+    const lang = targetLocale === 'en' ? 'en' : targetLocale;
     const [translatedTitle, translatedExcerpt, translatedContent] = await Promise.all([
-      translateWithOpenAI(title, 'title'),
-      translateWithOpenAI(excerpt, 'excerpt'),
-      translateWithOpenAI(content, 'content'),
+      translateWithGoogle(title, lang),
+      translateWithGoogle(excerpt, lang),
+      translateWithGoogle(content, lang),
     ]);
 
     // Cache the result
