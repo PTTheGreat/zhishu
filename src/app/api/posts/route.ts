@@ -19,27 +19,15 @@ export async function GET(request: NextRequest) {
 
   // Translate titles & excerpts for non-Chinese locales (batch: only 2 API calls)
   if (locale !== 'zh') {
-    // Debug mode: ?debug=1 to see timing
-    const debug = searchParams.get('debug') === '1';
     try {
-      const start = Date.now();
       const translationMap = await translatePostSummaries(posts, locale);
-      const elapsed = Date.now() - start;
       const translated = posts.map((post) => {
         const t = translationMap.get(post.id);
         return t ? { ...post, title: t.title, excerpt: t.excerpt } : post;
       });
-      if (debug) {
-        return NextResponse.json({
-          _debug: { elapsed, mapSize: translationMap.size, hasKey: !!process.env.GOOGLE_TRANSLATE_API_KEY, postCount: posts.length },
-          posts: translated.slice(0, 3),
-        });
-      }
       return NextResponse.json(translated);
-    } catch (err) {
-      if (debug) {
-        return NextResponse.json({ _error: err instanceof Error ? err.message : 'unknown', postCount: posts.length });
-      }
+    } catch {
+      // Fallback: return original
       return NextResponse.json(posts);
     }
   }
