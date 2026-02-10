@@ -6,7 +6,7 @@ import BlogCard from '@/components/BlogCard';
 import Pagination from '@/components/Pagination';
 import Link from 'next/link';
 import { Post } from '@/lib/types';
-import { useT } from '@/i18n/context';
+import { useT, useLocale } from '@/i18n/context';
 
 const POSTS_PER_PAGE = 9;
 
@@ -16,6 +16,7 @@ export default function BlogPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const t = useT();
+  const locale = useLocale();
 
   const fetchPosts = useCallback(async () => {
     setLoading(true);
@@ -24,6 +25,7 @@ export default function BlogPage() {
       if (activeCategory !== 'latest') {
         params.set('category', activeCategory);
       }
+      params.set('locale', locale);
       const res = await fetch(`/api/posts?${params.toString()}`);
       const data = await res.json();
       setPosts(data);
@@ -32,7 +34,7 @@ export default function BlogPage() {
     } finally {
       setLoading(false);
     }
-  }, [activeCategory]);
+  }, [activeCategory, locale]);
 
   useEffect(() => {
     fetchPosts();

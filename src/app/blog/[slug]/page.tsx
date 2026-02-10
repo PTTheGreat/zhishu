@@ -4,6 +4,7 @@ import { getPostBySlug, getPublishedPosts } from '@/lib/posts';
 import { CATEGORY_COLORS } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import { getLocale, getDictionary } from '@/i18n/server';
+import { translatePost, translatePostSummary } from '@/lib/translate';
 import ShareButtons from './ShareButtons';
 
 export async function generateStaticParams() {
@@ -24,15 +25,49 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   const locale = await getLocale();
   const t = getDictionary(locale);
 
+  // Translate post content if in English locale
+  let displayTitle = post.title;
+  let displayContent = post.content;
+
+  if (locale === 'en') {
+    const translated = await translatePost(
+      post.id,
+      post.title,
+      post.excerpt,
+      post.content,
+      'en'
+    );
+    displayTitle = translated.title;
+    displayContent = translated.content;
+  }
+
   const allPosts = getPublishedPosts();
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
-  const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
-  const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  let prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  let nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   // Related posts: same category, exclude current, max 3
-  const relatedPosts = allPosts
+  let relatedPosts = allPosts
     .filter((p) => p.category === post.category && p.slug !== slug)
     .slice(0, 3);
+
+  // Translate adjacent / related post titles for English locale
+  if (locale === 'en') {
+    if (prevPost) {
+      const t1 = await translatePostSummary(prevPost.id, prevPost.title, prevPost.excerpt, 'en');
+      prevPost = { ...prevPost, title: t1.title };
+    }
+    if (nextPost) {
+      const t2 = await translatePostSummary(nextPost.id, nextPost.title, nextPost.excerpt, 'en');
+      nextPost = { ...nextPost, title: t2.title };
+    }
+    relatedPosts = await Promise.all(
+      relatedPosts.map(async (rp) => {
+        const t3 = await translatePostSummary(rp.id, rp.title, rp.excerpt, 'en');
+        return { ...rp, title: t3.title };
+      })
+    );
+  }
 
   const dateLocale = locale === 'zh' ? 'zh-CN' : 'en-US';
   const date = new Date(post.createdAt)
@@ -95,7 +130,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             className="font-title"
             style={{ fontSize: '28px', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.02em', color: 'var(--text-strong)' }}
           >
-            {post.title}
+            {displayTitle}
           </h1>
 
           {/* Author info with real avatar */}
@@ -144,7 +179,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           <div
             className="article-content"
             style={{ marginTop: '40px' }}
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: displayContent }}
           />
 
           {/* Cover illustration */}
