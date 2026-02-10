@@ -1,5 +1,12 @@
 import { cookies, headers } from 'next/headers';
-import type { Locale } from './context';
+import zh from './zh';
+import en from './en';
+import type { Dict } from './zh';
+import type { Locale } from './types';
+
+export type { Locale };
+
+const DICTS: Record<Locale, Dict> = { zh, en };
 
 /**
  * Read locale in Server Components.
@@ -17,4 +24,9 @@ export async function getLocale(): Promise<Locale> {
   if (header === 'en' || header === 'zh') return header;
 
   return 'zh';
+}
+
+/** Get dictionary for a given locale (server-safe, no 'use client'). */
+export function getDictionary(locale: Locale): Dict {
+  return DICTS[locale] ?? zh;
 }

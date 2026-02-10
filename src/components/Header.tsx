@@ -13,8 +13,6 @@ export default function Header() {
 
   const navLinks = [
     { label: t.nav.features, href: '/#features' },
-    { label: t.nav.resources, href: '/#insights' },
-    { label: t.nav.cases, href: '/#cases' },
     { label: t.nav.blog, href: '/blog' },
   ];
 
@@ -151,7 +149,7 @@ export default function Header() {
           </button>
 
           <Link
-            href="/#cta"
+            href="/demo"
             onClick={() => setMenuOpen(false)}
             style={{
               fontSize: '14px',

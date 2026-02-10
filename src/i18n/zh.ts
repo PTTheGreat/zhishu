@@ -37,9 +37,13 @@ const zh = {
   /* ─── Stats ─────────────────────────────────────────────────────── */
   stats: {
     platforms: '覆盖内容平台',
+    platformsValue: '30+',
     dailyCrawl: '日均抓取内容',
+    dailyCrawlValue: '1亿+',
     kolDb: '达人数据库',
+    kolDbValue: '500万+',
     clients: '品牌客户',
+    clientsValue: '2000+',
   },
 
   /* ─── Features ──────────────────────────────────────────────────── */
@@ -121,10 +125,36 @@ const zh = {
   /* ─── CTA ───────────────────────────────────────────────────────── */
   cta: {
     heading: '开始用数据驱动你的品牌决策',
-    desc: '免费试用 14 天，无需信用卡。体验全网内容洞察的力量。',
+    desc: '体验全网内容洞察的力量，让每一个品牌决策都有据可依。',
     primary: '免费试用',
     secondary: '预约演示',
     social: '已有 2000+ 品牌在使用值数',
+  },
+
+  /* ─── Demo / Book a Demo ─────────────────────────────────────────── */
+  demo: {
+    pageTitle: '预约产品演示',
+    pageDesc: '填写以下信息，我们的产品顾问将在 1 个工作日内与您联系，为您安排专属演示。',
+    companyName: '公司名称',
+    companyNamePlaceholder: '请输入公司全称',
+    contactName: '联系人姓名',
+    contactNamePlaceholder: '请输入您的姓名',
+    email: '工作邮箱',
+    emailPlaceholder: '请输入工作邮箱',
+    phone: '联系电话',
+    phonePlaceholder: '请输入手机号',
+    companySize: '公司规模',
+    companySizeOptions: ['1-50 人', '51-200 人', '201-1000 人', '1000 人以上'],
+    needs: '需求描述',
+    needsPlaceholder: '请简要描述您的业务场景和期望了解的功能（选填）',
+    submit: '提交预约',
+    submitting: '提交中...',
+    successTitle: '预约成功！',
+    successDesc: '感谢您的预约，我们的产品顾问将在 1 个工作日内通过邮件或电话与您联系。',
+    backToHome: '返回首页',
+    requiredField: '此项为必填',
+    invalidEmail: '请输入有效的邮箱地址',
+    invalidPhone: '请输入有效的联系电话',
   },
 
   /* ─── Footer ────────────────────────────────────────────────────── */

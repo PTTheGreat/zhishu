@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getLocale } from '@/i18n/server';
-import { getDictionary } from '@/i18n/context';
+import { getLocale, getDictionary } from '@/i18n/server';
 import { LocaleProvider } from '@/i18n/context';
 
 export async function generateMetadata(): Promise<Metadata> {

@@ -93,7 +93,7 @@ function HeroSection() {
         {/* CTA buttons */}
         <div className="hero-cta" style={{ marginTop: '40px' }}>
           <Link
-            href="#cta"
+            href="/demo"
             style={{
               borderRadius: '12px',
               padding: '12px 32px',
@@ -138,10 +138,10 @@ function StatsBar() {
   const t = useT();
 
   const stats = [
-    { value: '30+', label: t.stats.platforms },
-    { value: locale100M(), label: t.stats.dailyCrawl },
-    { value: locale5M(), label: t.stats.kolDb },
-    { value: '2000+', label: t.stats.clients },
+    { value: t.stats.platformsValue, label: t.stats.platforms },
+    { value: t.stats.dailyCrawlValue, label: t.stats.dailyCrawl },
+    { value: t.stats.kolDbValue, label: t.stats.kolDb },
+    { value: t.stats.clientsValue, label: t.stats.clients },
   ];
 
   return (
@@ -170,10 +170,6 @@ function StatsBar() {
     </section>
   );
 }
-
-/** Locale-aware stat values that differ in format */
-function locale100M() { return '1亿+'; }
-function locale5M() { return '500万+'; }
 
 /* ─── Features: 数据 / 分析 / 预测 / 处置 ─────────────────────────────── */
 
@@ -522,22 +518,26 @@ function CtaSection() {
             {t.cta.desc}
           </p>
           <div className="cta-buttons" style={{ marginTop: '32px' }}>
-            <button
+            <Link
+              href="/demo"
               style={{
+                display: 'inline-block',
                 borderRadius: '12px',
                 padding: '12px 32px',
                 fontSize: '14px',
                 fontWeight: 500,
                 color: '#fff',
                 background: 'var(--highlight)',
-                border: 'none',
-                cursor: 'pointer',
+                textDecoration: 'none',
+                transition: 'opacity 0.2s',
               }}
             >
               {t.cta.primary}
-            </button>
-            <button
+            </Link>
+            <Link
+              href="/demo"
               style={{
+                display: 'inline-block',
                 borderRadius: '12px',
                 border: '1px solid rgba(255,255,255,0.3)',
                 padding: '12px 32px',
@@ -545,11 +545,12 @@ function CtaSection() {
                 fontWeight: 500,
                 color: '#fff',
                 background: 'transparent',
-                cursor: 'pointer',
+                textDecoration: 'none',
+                transition: 'opacity 0.2s',
               }}
             >
               {t.cta.secondary}
-            </button>
+            </Link>
           </div>
           <p style={{ marginTop: '24px', fontSize: '12px', color: 'rgba(255,255,255,0.5)' }}>
             {t.cta.social}

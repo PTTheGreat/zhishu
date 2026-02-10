@@ -3,8 +3,7 @@ import Image from 'next/image';
 import { getPostBySlug, getPublishedPosts } from '@/lib/posts';
 import { CATEGORY_COLORS } from '@/lib/types';
 import { notFound } from 'next/navigation';
-import { getLocale } from '@/i18n/server';
-import { getDictionary } from '@/i18n/context';
+import { getLocale, getDictionary } from '@/i18n/server';
 import ShareButtons from './ShareButtons';
 
 export async function generateStaticParams() {
