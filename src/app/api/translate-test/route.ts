@@ -30,12 +30,13 @@ export async function GET() {
     const data = await res.json();
 
     if (!res.ok) {
-      return NextResponse.json({
-        status: 'error',
-        httpStatus: res.status,
-        apiKeyPrefix: apiKey.substring(0, 10) + '...',
-        errorResponse: data,
-      });
+    return NextResponse.json({
+      status: 'error',
+      httpStatus: res.status,
+      apiKeyPrefix: apiKey.substring(0, 10) + '...',
+      errorResponse: data,
+      ts: Date.now(),
+    }, { headers: { 'Cache-Control': 'no-store' } });
     }
 
     return NextResponse.json({
@@ -43,7 +44,8 @@ export async function GET() {
       apiKeyPrefix: apiKey.substring(0, 10) + '...',
       input: '你好世界',
       output: data?.data?.translations?.[0]?.translatedText,
-    });
+      ts: Date.now(),
+    }, { headers: { 'Cache-Control': 'no-store' } });
   } catch (err) {
     return NextResponse.json({
       status: 'error',
