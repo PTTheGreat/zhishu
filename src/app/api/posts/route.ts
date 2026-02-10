@@ -19,12 +19,24 @@ export async function GET(request: NextRequest) {
 
   // Translate titles & excerpts for non-Chinese locales (batch: only 2 API calls)
   if (locale !== 'zh') {
-    const translationMap = await translatePostSummaries(posts, locale);
-    const translated = posts.map((post) => {
-      const t = translationMap.get(post.id);
-      return t ? { ...post, title: t.title, excerpt: t.excerpt } : post;
-    });
-    return NextResponse.json(translated);
+    try {
+      const start = Date.now();
+      const translationMap = await translatePostSummaries(posts, locale);
+      const elapsed = Date.now() - start;
+      const translated = posts.map((post) => {
+        const t = translationMap.get(post.id);
+        return t ? { ...post, title: t.title, excerpt: t.excerpt } : post;
+      });
+      // Add debug header
+      const res = NextResponse.json(translated);
+      res.headers.set('X-Translate-Ms', String(elapsed));
+      res.headers.set('X-Translate-Count', String(translationMap.size));
+      return res;
+    } catch (err) {
+      console.error('Translation in posts API failed:', err);
+      // Fallback: return Chinese
+      return NextResponse.json(posts);
+    }
   }
 
   return NextResponse.json(posts);
