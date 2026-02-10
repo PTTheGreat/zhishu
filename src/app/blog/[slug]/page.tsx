@@ -39,16 +39,15 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <div
+      className="blog-detail-layout"
       style={{
         maxWidth: 'var(--container-width)',
         margin: '0 auto',
-        display: 'flex',
-        gap: '48px',
         padding: '48px 24px',
       }}
     >
       {/* Left sidebar */}
-      <aside style={{ width: '200px', flexShrink: 0, paddingRight: '32px' }}>
+      <aside className="blog-detail-sidebar">
         <Link
           href="/blog"
           className="hover-highlight"
@@ -105,11 +104,11 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       </aside>
 
       {/* Article content */}
-      <div style={{ flex: 1, maxWidth: 'var(--content-width)' }}>
+      <div className="blog-detail-content">
         <article>
           <h1
             className="font-title"
-            style={{ fontSize: '30px', fontWeight: 700, lineHeight: 1.35, color: 'var(--text-strong)' }}
+            style={{ fontSize: '28px', fontWeight: 700, lineHeight: 1.3, letterSpacing: '-0.02em', color: 'var(--text-strong)' }}
           >
             {post.title}
           </h1>
@@ -181,11 +180,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
         {/* ─── Prev / Next navigation ──────────────────────────────────── */}
         <div
+          className="prev-next-grid"
           style={{
             marginTop: '48px',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '24px',
             borderTop: '1px solid var(--border-divider)',
             paddingTop: '40px',
           }}
@@ -204,13 +201,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             >
               <div style={{ fontSize: '12px', color: 'var(--text-decorative)' }}>← 上一篇</div>
               <div
-                className="font-title hover-highlight"
+                className="card-title hover-highlight"
                 style={{
                   marginTop: '8px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  lineHeight: 1.6,
-                  color: 'var(--text-strong)',
                   display: '-webkit-box',
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
@@ -239,13 +232,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             >
               <div style={{ fontSize: '12px', color: 'var(--text-decorative)' }}>下一篇 →</div>
               <div
-                className="font-title hover-highlight"
+                className="card-title hover-highlight"
                 style={{
                   marginTop: '8px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  lineHeight: 1.6,
-                  color: 'var(--text-strong)',
                   display: '-webkit-box',
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
@@ -263,20 +252,8 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         {/* ─── Related articles ────────────────────────────────────────── */}
         {relatedPosts.length > 0 && (
           <div style={{ marginTop: '64px' }}>
-            <h3
-              className="font-title"
-              style={{ fontSize: '18px', fontWeight: 600, color: 'var(--text-strong)' }}
-            >
-              相关推荐
-            </h3>
-            <div
-              style={{
-                marginTop: '24px',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '24px',
-              }}
-            >
+            <h3 className="module-heading">相关推荐</h3>
+            <div className="related-posts-grid" style={{ marginTop: '24px' }}>
               {relatedPosts.map((rp) => (
                 <Link
                   key={rp.id}
@@ -316,13 +293,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
                         .replace(/\//g, '-')}
                     </div>
                     <div
-                      className="font-title hover-highlight"
+                      className="card-title hover-highlight"
                       style={{
                         marginTop: '6px',
-                        fontSize: '14px',
-                        fontWeight: 600,
-                        lineHeight: 1.4,
-                        color: 'var(--text-strong)',
                         display: '-webkit-box',
                         WebkitLineClamp: 2,
                         WebkitBoxOrient: 'vertical',

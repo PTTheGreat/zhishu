@@ -237,7 +237,7 @@ export default function HeroDemo() {
         </div>
 
         {/* Content area */}
-        <div style={{ padding: '24px', minHeight: '420px' }}>
+        <div className="hero-demo-content" style={{ padding: '24px', minHeight: '420px' }}>
           {/* Query bar */}
           <div
             style={{
@@ -313,10 +313,9 @@ export default function HeroDemo() {
           {/* Phase 0: Data cards */}
           {phase >= 0 && (
             <div
+              className="hero-demo-data-grid"
               style={{
-                display: 'grid',
                 gridTemplateColumns: `repeat(${scene.data.length}, 1fr)`,
-                gap: '10px',
                 marginBottom: '16px',
               }}
             >
@@ -390,6 +389,7 @@ export default function HeroDemo() {
           {/* Phase 2: Predictions */}
           {phase >= 2 && (
             <div
+              className="hero-demo-predict-grid"
               style={{
                 display: 'grid',
                 gridTemplateColumns: `repeat(${scene.predictions.length}, 1fr)`,

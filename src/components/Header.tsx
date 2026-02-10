@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 const navLinks = [
   { label: '功能', href: '/#features' },
@@ -12,6 +13,7 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header
@@ -19,6 +21,8 @@ export default function Header() {
         width: '100%',
         borderBottom: '1px solid var(--border-divider)',
         backgroundColor: 'var(--bg-primary)',
+        position: 'relative',
+        zIndex: 200,
       }}
     >
       <div
@@ -31,7 +35,7 @@ export default function Header() {
           justifyContent: 'space-between',
         }}
       >
-        {/* Logo — 思源宋体 */}
+        {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
           <div
             style={{
@@ -63,13 +67,32 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+        {/* Hamburger button (mobile) */}
+        <button
+          className="header-hamburger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="菜单"
+        >
+          {menuOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
+
+        {/* Nav */}
+        <nav className={`header-nav ${menuOpen ? 'is-open' : ''}`}>
           {navLinks.map((link) => {
             const active = link.href === '/blog' && pathname?.startsWith('/blog');
             return (
               <Link
                 key={link.label}
                 href={link.href}
+                onClick={() => setMenuOpen(false)}
                 style={{
                   fontSize: '14px',
                   fontWeight: active ? 500 : 400,
@@ -84,22 +107,8 @@ export default function Header() {
           })}
 
           <Link
-            href="#"
-            style={{
-              fontSize: '14px',
-              fontWeight: 400,
-              padding: '6px 16px',
-              borderRadius: '8px',
-              border: '1px solid var(--border-divider)',
-              color: 'var(--text-regular)',
-              textDecoration: 'none',
-              transition: 'opacity 0.2s',
-            }}
-          >
-            登录
-          </Link>
-          <Link
             href="/#cta"
+            onClick={() => setMenuOpen(false)}
             style={{
               fontSize: '14px',
               fontWeight: 500,
@@ -109,6 +118,7 @@ export default function Header() {
               color: '#fff',
               textDecoration: 'none',
               transition: 'opacity 0.2s',
+              textAlign: 'center',
             }}
           >
             免费试用

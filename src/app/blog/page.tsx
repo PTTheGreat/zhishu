@@ -50,15 +50,14 @@ export default function BlogPage() {
   return (
     <>
       <div
+        className="blog-layout"
         style={{
           maxWidth: 'var(--container-width)',
           margin: '0 auto',
-          display: 'flex',
-          gap: '48px',
           padding: '48px 24px',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div className="blog-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <Sidebar activeCategory={activeCategory} onCategoryChange={handleCategoryChange} />
           <Link
             href="/editor"
@@ -85,7 +84,7 @@ export default function BlogPage() {
           </Link>
         </div>
 
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div className="blog-main">
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '80px 0' }}>
               <div style={{ fontSize: '14px', color: 'var(--text-decorative)' }}>加载中...</div>
@@ -96,14 +95,7 @@ export default function BlogPage() {
             </div>
           ) : (
             <>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  columnGap: '30px',
-                  rowGap: '36px',
-                }}
-              >
+              <div className="blog-card-grid">
                 {paginatedPosts.map((post) => (
                   <BlogCard key={post.id} post={post} />
                 ))}
@@ -129,24 +121,12 @@ export default function BlogPage() {
           }}
         >
           <div style={{ maxWidth: '520px', margin: '0 auto', textAlign: 'center' }}>
-            <h2
-              className="font-title"
-              style={{ fontSize: '24px', fontWeight: 700, color: 'var(--text-strong)' }}
-            >
-              订阅值数洞察周刊
-            </h2>
-            <p
-              style={{
-                marginTop: '12px',
-                fontSize: '14px',
-                lineHeight: 1.7,
-                color: 'var(--text-secondary)',
-              }}
-            >
+            <h2 className="section-heading">订阅值数洞察周刊</h2>
+            <p className="section-desc" style={{ marginTop: '12px' }}>
               每周精选全网营销趋势、达人动态、品牌案例，直送你的邮箱。已有 8,000+ 营销人订阅。
             </p>
 
-            <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="subscribe-form" style={{ marginTop: '24px' }}>
               <input
                 type="email"
                 placeholder="输入你的工作邮箱"
@@ -179,11 +159,7 @@ export default function BlogPage() {
             </div>
 
             <p style={{ marginTop: '12px', fontSize: '12px', color: 'var(--text-decorative)' }}>
-              无垃圾邮件，随时退订。查看我们的
-              <a href="#" style={{ textDecoration: 'underline' }}>
-                隐私政策
-              </a>
-              。
+              无垃圾邮件，随时退订。
             </p>
           </div>
         </div>

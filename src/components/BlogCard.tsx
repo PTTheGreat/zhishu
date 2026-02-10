@@ -59,13 +59,9 @@ export default function BlogCard({ post }: { post: Post }) {
           {date}
         </div>
         <h3
-          className="font-title hover-highlight"
+          className="card-title hover-highlight"
           style={{
             marginTop: '8px',
-            fontSize: '15px',
-            fontWeight: 600,
-            lineHeight: 1.6,
-            color: 'var(--text-strong)',
             display: '-webkit-box',
             WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',

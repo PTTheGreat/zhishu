@@ -12,11 +12,11 @@ export default function Sidebar({ activeCategory, onCategoryChange }: SidebarPro
     <aside style={{ width: '200px', flexShrink: 0, paddingRight: '32px' }}>
       <h1
         className="font-en"
-        style={{ fontSize: '30px', fontWeight: 600, color: 'var(--highlight)' }}
+        style={{ fontSize: '24px', fontWeight: 600, color: 'var(--highlight)', letterSpacing: '-0.02em' }}
       >
         Blog
       </h1>
-      <p style={{ marginTop: '12px', fontSize: '14px', lineHeight: 1.7, color: 'var(--text-secondary)' }}>
+      <p style={{ marginTop: '10px', fontSize: '13px', lineHeight: 1.65, color: 'var(--text-secondary)' }}>
         全网洞察营销，
         <br />
         先行者的思考与实践。
