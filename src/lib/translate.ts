@@ -33,14 +33,29 @@ function writeCache(cache: CacheMap) {
   }
 }
 
-/** Call Google Cloud Translation API v2 to translate a single text. */
-async function callGoogleTranslate(text: string, targetLang: string): Promise<string> {
+/**
+ * Call Google Cloud Translation API v2 to translate one or more texts in a single request.
+ * Returns an array of translated strings in the same order as input.
+ */
+async function callGoogleTranslateBatch(texts: string[], targetLang: string): Promise<string[]> {
   const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
-  if (!apiKey || !text.trim()) return text;
+  if (!apiKey) return texts;
+
+  // Filter out empty strings but remember their positions
+  const indexMap: number[] = [];
+  const nonEmpty: string[] = [];
+  texts.forEach((t, i) => {
+    if (t.trim()) {
+      indexMap.push(i);
+      nonEmpty.push(t);
+    }
+  });
+
+  if (nonEmpty.length === 0) return texts;
 
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout
+    const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
 
     const res = await fetch(
       `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`,
@@ -48,7 +63,7 @@ async function callGoogleTranslate(text: string, targetLang: string): Promise<st
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          q: text,
+          q: nonEmpty,
           source: 'zh-CN',
           target: targetLang,
           format: 'html',
@@ -61,16 +76,28 @@ async function callGoogleTranslate(text: string, targetLang: string): Promise<st
 
     if (!res.ok) {
       console.error('Google Translate error:', res.status, await res.text());
-      return text; // fallback to original
+      return texts; // fallback to originals
     }
 
     const data = await res.json();
-    return data?.data?.translations?.[0]?.translatedText || text;
+    const translations = data?.data?.translations || [];
+
+    // Reconstruct the full array
+    const result = [...texts];
+    indexMap.forEach((originalIdx, batchIdx) => {
+      result[originalIdx] = translations[batchIdx]?.translatedText || texts[originalIdx];
+    });
+    return result;
   } catch (err) {
-    // Network error / timeout — return original text gracefully
-    console.error('Google Translate fetch failed (network/timeout):', err instanceof Error ? err.message : err);
-    return text;
+    console.error('Google Translate batch failed:', err instanceof Error ? err.message : err);
+    return texts; // fallback to originals
   }
+}
+
+/** Convenience: translate a single text. */
+async function callGoogleTranslate(text: string, targetLang: string): Promise<string> {
+  const [result] = await callGoogleTranslateBatch([text], targetLang);
+  return result;
 }
 
 /**
@@ -169,4 +196,74 @@ export async function translatePostSummary(
   writeCache(cache);
 
   return { title: translatedTitle, excerpt: translatedExcerpt };
+}
+
+/**
+ * Batch-translate summaries for multiple posts (used by list API).
+ * Uses only 2 Google API calls regardless of post count.
+ */
+export async function translatePostSummaries(
+  posts: { id: string; title: string; excerpt: string }[],
+  targetLocale: string
+): Promise<Map<string, { title: string; excerpt: string }>> {
+  const cache = readCache();
+  const lang = targetLocale === 'en' ? 'en' : targetLocale;
+  const result = new Map<string, { title: string; excerpt: string }>();
+
+  // Separate cached vs uncached
+  const uncachedIndices: number[] = [];
+  posts.forEach((post, idx) => {
+    const cacheKey = `${post.id}_${targetLocale}`;
+    if (cache[cacheKey]) {
+      result.set(post.id, {
+        title: cache[cacheKey].title,
+        excerpt: cache[cacheKey].excerpt,
+      });
+    } else {
+      uncachedIndices.push(idx);
+    }
+  });
+
+  // If all cached, return immediately
+  if (uncachedIndices.length === 0) return result;
+
+  // No API key? Return originals
+  if (!process.env.GOOGLE_TRANSLATE_API_KEY) {
+    uncachedIndices.forEach((idx) => {
+      result.set(posts[idx].id, {
+        title: posts[idx].title,
+        excerpt: posts[idx].excerpt,
+      });
+    });
+    return result;
+  }
+
+  // Batch translate: all titles in one call, all excerpts in another
+  const titlesToTranslate = uncachedIndices.map((i) => posts[i].title);
+  const excerptsToTranslate = uncachedIndices.map((i) => posts[i].excerpt);
+
+  const [translatedTitles, translatedExcerpts] = await Promise.all([
+    callGoogleTranslateBatch(titlesToTranslate, lang),
+    callGoogleTranslateBatch(excerptsToTranslate, lang),
+  ]);
+
+  // Store results and update cache
+  uncachedIndices.forEach((origIdx, batchIdx) => {
+    const post = posts[origIdx];
+    const tTitle = translatedTitles[batchIdx] || post.title;
+    const tExcerpt = translatedExcerpts[batchIdx] || post.excerpt;
+
+    result.set(post.id, { title: tTitle, excerpt: tExcerpt });
+
+    const cacheKey = `${post.id}_${targetLocale}`;
+    cache[cacheKey] = {
+      title: tTitle,
+      excerpt: tExcerpt,
+      content: '',
+      translatedAt: new Date().toISOString(),
+    };
+  });
+
+  writeCache(cache);
+  return result;
 }

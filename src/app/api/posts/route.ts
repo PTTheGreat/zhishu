@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllPosts, getPostsByCategory, createPost } from '@/lib/posts';
-import { translatePostSummary } from '@/lib/translate';
+import { translatePostSummaries } from '@/lib/translate';
 import { v4 as uuidv4 } from 'uuid';
 
 export const dynamic = 'force-dynamic';
@@ -17,19 +17,13 @@ export async function GET(request: NextRequest) {
     posts = getAllPosts().filter((p) => p.published);
   }
 
-  // Translate titles & excerpts for non-Chinese locales
-  if (locale !== 'zh' && process.env.GOOGLE_TRANSLATE_API_KEY) {
-    const translated = await Promise.all(
-      posts.map(async (post) => {
-        const { title, excerpt } = await translatePostSummary(
-          post.id,
-          post.title,
-          post.excerpt,
-          locale
-        );
-        return { ...post, title, excerpt };
-      })
-    );
+  // Translate titles & excerpts for non-Chinese locales (batch: only 2 API calls)
+  if (locale !== 'zh') {
+    const translationMap = await translatePostSummaries(posts, locale);
+    const translated = posts.map((post) => {
+      const t = translationMap.get(post.id);
+      return t ? { ...post, title: t.title, excerpt: t.excerpt } : post;
+    });
     return NextResponse.json(translated);
   }
 
